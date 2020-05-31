@@ -2,28 +2,30 @@
 #include <string_view>
 #include <vector>
 
-std::vector<std::string_view> tokenize(const std::string &sentence, char separator) {
+#define CATCH_CONFIG_MAIN
+#include "../../include/catch.hpp"
+
+std::vector<std::string_view> tokenize(std::string_view sentence, char separator) {
     std::vector<std::string_view> result;
-
     size_t pos = 0;
-    std::string_view sv{sentence};
 
-    while (pos != sv.npos) {
-        pos = sv.find(separator);
-        result.push_back(sv.substr(0, pos));
+    while (pos != std::string_view::npos) {
+        pos = sentence.find(separator);
+        result.push_back(sentence.substr(0, pos));
 
-        if (pos != sv.npos) {
-            sv.remove_prefix(pos + 1);
+        if (pos != std::string_view::npos) {
+            sentence.remove_prefix(pos + 1);
         }
     }
 
     return result;
 }
 
-int main() {
-    auto tokens = tokenize("I have a white cat", ' ');
+TEST_CASE( "Tokenize" ) {
+    const std::string sentence {"I have a white cat"};
+    const std::vector<std::string_view> expected_tokens {"I", "have", "a", "white", "cat"};
 
-    for (const auto &token : tokens) {
-        std::cout << token << std::endl;
-    }
+    const auto result = tokenize(sentence, ' ');
+
+    REQUIRE( result == expected_tokens );
 }
