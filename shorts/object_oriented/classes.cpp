@@ -36,12 +36,14 @@ public:
     // for copy-and-swap idiom
     friend void swap(Cell& lhs, Cell& rhs) noexcept;
 
-    // move constructor
+    // move constructor: should always be marked noexcept
+    // should be implemented for classes intended to be used with std containers
     Cell(Cell&& src) noexcept : Cell() {
         swap(*this, src);
     }
 
-    // move assignment
+    // move assignment: should always be marked noexcept
+    // should be implemented for classes intended to be used with std containers
     Cell& operator=(Cell&& rhs) noexcept {
         if (this == &rhs) {
             return *this;
