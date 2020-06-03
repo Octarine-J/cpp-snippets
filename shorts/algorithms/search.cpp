@@ -17,3 +17,14 @@ TEST_CASE( "Search in a Container" ) {
     ++result;
     REQUIRE( *result == "book" );  // second result
 }
+
+
+TEST_CASE( "Count Items that Match Criteria" ) {
+    std::vector<int> v = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    size_t result = std::count_if(v.begin(), v.end(), [](auto value) {
+        return value % 2 == 0;
+    });
+
+    REQUIRE( result == 4 );
+}
