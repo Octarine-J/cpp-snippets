@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <array>
 #include <numeric>
 #include <vector>
 
@@ -30,14 +29,16 @@ TEST_CASE( "Product" ) {
     REQUIRE( product2 == 105 );
 }
 
-TEST_CASE( "Generate" ) {
-    // replaces the value in a container
-    std::array<int, 5> a;
+TEST_CASE( "And" ) {
+    std::vector<bool> v = {true, true, true};
 
-    int x = 1;
-    std::generate(a.begin(), a.end(), [&x]{
-        return x *= 2;
-    });
+    auto my_and = [](const std::vector<bool>& v) {
+        return std::accumulate(v.begin(), v.end(), true, std::logical_and<>());
+    };
 
-    REQUIRE( a == std::array<int, 5>{2, 4, 8, 16, 32} );
+    REQUIRE( my_and(v) == true );
+
+    v.push_back(false);
+
+    REQUIRE( my_and(v) == false );
 }
