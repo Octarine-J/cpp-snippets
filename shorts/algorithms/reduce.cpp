@@ -42,3 +42,23 @@ TEST_CASE( "And" ) {
 
     REQUIRE( my_and(v) == false );
 }
+
+TEST_CASE( "And (using a Standard Algorithm" ) {
+    std::vector<int> v = {2, 4, 6, 8};
+
+    bool all_even = std::all_of(v.begin(), v.end(), [](int value) {
+        return value % 2 == 0;
+    });
+
+    REQUIRE( all_even );
+}
+
+TEST_CASE( "Or (using a Standard Algorithm" ) {
+    std::vector<int> v = {1, 4, 3, 7};
+
+    bool has_even = std::any_of(v.begin(), v.end(), [](int value) {
+        return value % 2 == 0;
+    });
+
+    REQUIRE( has_even );
+}

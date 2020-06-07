@@ -37,6 +37,15 @@ TEST_CASE( "Search in a Container using a Member Function" ) {
     REQUIRE( result == words.cend() );  // no empty strings
 }
 
+TEST_CASE( "Find Any Value from a Set of Values" ) {
+    std::vector<int> v = {1, 3, 5, 15, 7, 24, 99, 42, 13, 11};
+    std::vector<int> targets = {13, 3};
+
+    auto it = std::find_first_of(v.begin(), v.end(), targets.begin(), targets.end());
+
+    REQUIRE( *it == 3 );
+}
+
 TEST_CASE( "Count Items that Match Criteria" ) {
     std::vector<int> v = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
