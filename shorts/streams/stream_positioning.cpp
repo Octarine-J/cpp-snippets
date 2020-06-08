@@ -23,12 +23,12 @@ TEST_CASE( "Navigating Stream with Seek" ) {
     // seek 3 bytes from the current position
     ss.seekg(3, std::ios_base::cur);
     ss >> number;
-    REQUIRE(7, number);
+    REQUIRE( number == 7 );
 
     // seek 4 bytes from the end
     ss.seekg(-4, std::ios_base::end);
     ss >> number;
-    REQUIRE(16, number);
+    REQUIRE( number == 16 );
 
     // get the current position
     REQUIRE( ss.tellg() == 13 );
