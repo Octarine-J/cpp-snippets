@@ -4,6 +4,23 @@
 #include "../../include/catch.hpp"
 
 
+TEST_CASE( "Binary Search" ) {
+    std::vector<int> v = {11, 32, 33, 50, 67};
+
+    // returns an iterator pointing to an element >= x (vector must be sorted)
+    auto it = std::lower_bound(v.begin(), v.end(), 40);
+
+    REQUIRE( *it == 50 );
+
+    // can use this iterator to insert a value so the vector remains sorted
+    v.insert(it, 40);
+
+    REQUIRE( std::is_sorted(v.begin(), v.end()) );
+
+    // "binary_search" returns true or false:
+    REQUIRE( std::binary_search(v.begin(), v.end(), 40) );
+}
+
 TEST_CASE( "Search in a Container with Lambda" ) {
     std::vector<std::string> words = {"archive", "business", "book"};
 

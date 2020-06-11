@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <execution>
 #include <numeric>
 #include <vector>
 
@@ -9,6 +10,14 @@ TEST_CASE( "Sum" ) {
     std::vector<int> v = {1, 5, 3, 7};
 
     int sum = std::accumulate(v.begin(), v.end(), 0);
+
+    REQUIRE( sum == 16 );
+}
+
+TEST_CASE( "Sum (Parallel)" ) {
+    std::vector<int> v = {1, 5, 3, 7};
+
+    int sum = std::reduce(std::execution::par_unseq, v.begin(), v.end(), 0);
 
     REQUIRE( sum == 16 );
 }
@@ -61,4 +70,13 @@ TEST_CASE( "Or (using a Standard Algorithm" ) {
     });
 
     REQUIRE( has_even );
+}
+
+TEST_CASE( "Inner Product" ) {
+    std::vector<int> a = {1, 2, 3};
+    std::vector<int> b = {3, 0, 7};
+
+    int result = std::inner_product(a.begin(), a.end(), b.begin(), 0);
+
+    REQUIRE( result == 24 );
 }
