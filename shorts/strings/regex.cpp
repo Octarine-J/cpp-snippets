@@ -72,7 +72,7 @@ TEST_CASE( "Match space" ) {
 
 TEST_CASE( "Back references" ) {
     // 4 digits followed by a dash, then the same 4 digits
-    std::regex re(R"(\d{4}-\1)");
+    std::regex re(R"((\d{4})-\1)");
 
     REQUIRE( std::regex_match("1234-1234", re) );
     REQUIRE( std::regex_match("9822-9822", re) );
@@ -89,4 +89,55 @@ TEST_CASE( "Match groups" ) {
     REQUIRE( match[0] == "127-0001");
     REQUIRE( match[1] == "127");
     REQUIRE( match[2] == "0001");
+}
+
+TEST_CASE( "Iterate over pattern occurrences in a string" ) {
+    std::regex re(R"(\w+)");
+
+    std::string input = "this is a white cat";
+    std::vector<std::string> result;
+
+    const std::sregex_token_iterator end;
+    for (std::sregex_token_iterator it(input.begin(), input.end(), re); it != end; ++it) {
+        result.push_back( *it );
+    }
+
+    REQUIRE( result == std::vector<std::string>{"this", "is", "a", "white", "cat"} );
+}
+
+TEST_CASE( "Tokenization using a regex" ) {
+    std::regex re(R"(\s*,\s*)");
+
+    std::string input = " some , comma,separated, values ,!,x ";
+    std::vector<std::string> result;
+
+    // -1: tokens that DO NOT match the regex
+    const std::sregex_token_iterator end;
+    for (std::sregex_token_iterator it(input.begin(), input.end(), re, -1); it != end; ++it) {
+        result.push_back( *it );
+    }
+
+    // NOTE: the space before the first word and after the last word is not removed
+    REQUIRE( result == std::vector<std::string>{" some", "comma", "separated", "values", "!", "x "} );
+}
+
+TEST_CASE( "Replace" ) {
+    std::regex re(R"(<h1>(.*)</h1><p>(.*)</p>)");
+    std::string input = "<body><h1>Header</h1><p>Paragraph</p></body>";
+    const std::string format = "<h2>$1<br>$2</h2>";
+
+    std::string result = std::regex_replace(input, re, format);
+
+    REQUIRE( result == "<body><h2>Header<br>Paragraph</h2></body>");
+}
+
+TEST_CASE( "Replace discarding the parts that do not match regex" ) {
+    std::regex re(R"(<h1>(.*)</h1><p>(.*)</p>)");
+    std::string input = "<body><h1>Header</h1><p>Paragraph</p></body>";
+    const std::string format = "<h2>$1<br>$2</h2>";
+
+    std::string result = std::regex_replace(input, re, format, 
+        std::regex_constants::format_no_copy);
+
+    REQUIRE( result == "<h2>Header<br>Paragraph</h2>");
 }
