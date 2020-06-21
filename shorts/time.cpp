@@ -1,20 +1,33 @@
 #include <chrono>
+#include <ctime>    // for strftime
+#include <iomanip>  // for put_time
+#include <iostream>
+#include <string>
+#include <vector>
 using namespace std::chrono;
 
-#define CATCH_CONFIG_MAIN
-#include "../include/catch.hpp"
 
+int main() {
+    system_clock::time_point t_point = system_clock::now();
+    time_t tt = system_clock::to_time_t(t_point);
+    tm* t = localtime(&tt);
 
-TEST_CASE( "Add duration" ) {
-    auto t = hours(1) + minutes(25) + seconds(10);
-    seconds sec(t);  // convert to seconds
+    // print current time
+    std::cout << std::put_time(t, "%H:%M:%S") << std::endl;
 
-    REQUIRE( sec.count() == 5110 );
-}
+    // convert to a string
+    char buffer[80] = {0};
+    std::strftime(buffer, sizeof(buffer), "%H:%M:%S", t);
 
-TEST_CASE( "Add duration (using literals)" ) {
-    auto t = 1h + 25min + 10s;
-    seconds sec(t);  // convert to seconds
+    std::cout << buffer << std::endl;
 
-    REQUIRE( sec.count() == 5110 );
+    // can also measure time
+    auto start = high_resolution_clock::now();
+
+    std::vector<std::string> temp(10000);
+
+    auto end = high_resolution_clock::now();
+    auto time_ms = duration_cast<nanoseconds>(end - start).count();
+
+    std::cout << "Executed in " << time_ms << " ns" << std::endl;
 }
