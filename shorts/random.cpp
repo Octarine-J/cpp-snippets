@@ -14,17 +14,33 @@ void print(const Container& v) {
     std::cout << std::endl;
 }
 
+template <class T, class Random>
+std::vector<T> random_vector(size_t n, const Random& get_random) {
+    std::vector<T> result(n);
+    std::generate(result.begin(), result.end(), get_random);
+    return result;
+}
+
 int main() {
     std::random_device rd;
-    const auto seed = static_cast<unsigned int>( rd.entropy() ? rd() : std::time(nullptr) );
+    const auto seed = static_cast<std::mt19937::result_type>(
+        rd.entropy() ? rd() : std::time(nullptr)
+    );
 
-    std::mt19937 engine(seed);
-    auto get_random = std::uniform_int_distribution<>(1, 6);
+    std::mt19937 engine(seed);  // Mersenne twister with all 14 parameters predefined
+    auto int_distribution = std::uniform_int_distribution<>(1, 6);
+    auto get_random = std::bind(int_distribution, engine);
 
-    for (int i = 0; i < 10; ++i) {
-        std::cout << get_random(engine) << " ";
-    }
-    std::cout << std::endl;
+    auto random_ints = random_vector<int>(10, get_random);
+    print(random_ints);
+
+    auto real_distribution = std::uniform_real_distribution<>(0.0, 1.0);
+    auto random_reals = random_vector<double>(10, std::bind(real_distribution, engine));
+    print(random_reals);
+
+    // also available:
+    // bernoulli_distribution; binomial_distribution; poisson_distribution;
+    // geometric_distribution; normal_distribution; etc.
 
 
     // can also select a sample from a range of predefined values
