@@ -11,6 +11,8 @@ int main() {
     
     // i-th field access 
     std::cout << "Data: " << std::get<1>(t) << std::endl;
+    // field access by type (if all types are distinct)
+    std::cout << "Data: " << std::get<const char*>(t) << std::endl;
 
     // tie() can be used to deconstruct tuple values (pre-C++17)
     int value;
