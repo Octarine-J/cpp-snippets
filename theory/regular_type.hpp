@@ -6,43 +6,55 @@ struct singleton
 {
     T value;
 
-    // semiregular
+    // semiregular type (1-4):
     
+    // 1. copy constructor; must accept by a const ref (otherwise: non-ending recursion)
     singleton(const singleton& x) : value(x.value) {}
 
+    // 2. default constructor
     singleton() {}
 
+    // 3. destructor
     ~singleton() {}
 
+    // 4. assignment operator
     singleton& operator=(const singleton& x) {
         value = x.value;
         return *this;
     }
 
-    // regular
+    // regular type (5-6):
     
+    // 5. equality
+    // note that this is NOT a member function
     friend bool operator==(const singleton& x, const singleton& y) {
         return x.value == y.value;
     }
     
+    // 6. inequality
     friend bool operator!=(const singleton& x, const singleton& y) {
         return !(x == y);
     }
 
-    // totally ordered
+    // totally ordered type (7-10):
  
+    // 7. less then
+    // all other comparisons are defined by using this operator
     friend bool operator<(const singleton& x, const singleton& y) {
         return x.value < y.value;
     }
 
+    // 8.
     friend bool operator>(const singleton& x, const singleton& y) {
         return y < x;
     }
 
+    // 9.
     friend bool operator<=(const singleton& x, const singleton& y) {
         return !(y < x);
     }
     
+    // 10.
     friend bool operator>=(const singleton& x, const singleton& y) {
         return !(x < y);
     }
