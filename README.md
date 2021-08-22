@@ -46,8 +46,7 @@ LD_LIBRARY_PATH=/usr/local/name-version/lib/ exe-name
 ## Repository Setup
 
 ```
-git submodule add git@github.com:google/googletest.git
+git submodule add https://github.com/google/googletest.git
 git submodule init
 git submodule update
 ```
-
