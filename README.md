@@ -13,7 +13,6 @@ On Windows, using VC++:
 ```
 "code-runner.executorMap": {
   "cpp": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat\" && cd $dir && cl $fileName /std:c++17 /nologo /EHsc /W4 /Fe:$fileNameWithoutExt.exe && $dir$fileNameWithoutExt.exe && DEL $dir$fileNameWithoutExt.exe && DEL $dir$fileNameWithoutExt.obj"
-  // "cpp": "g++ -std=c++17 $fullFileName -o $fileNameWithoutExt && $fileNameWithoutExt.exe && DEL $fileNameWithoutExt.exe"
 }
 ```
 
@@ -71,8 +70,7 @@ LD_LIBRARY_PATH=/usr/local/name-version/lib/ exe-name
 ## Repository Setup
 
 ```
-git submodule add git@github.com:google/googletest.git
+git submodule add https://github.com/google/googletest.git
 git submodule init
 git submodule update
 ```
-
