@@ -1,5 +1,30 @@
 # C++ Snippets
-Mini-Examples of C++ Syntax and its Standard Library
+This repository contains reusable snippets of C++ code to implement various
+tasks such as generating random numbers or creating templates.
+
+The repository also serves as a quick reminder for one who has not been working
+with C++ for a while.
+
+The most important directory (for now) is `shorts`. The most convenient way to work
+with it is to use Visual Studio Code. Each mini-app there can easily be run with
+the "Code Runner" plugin with the following configuration.
+
+On Windows, using VC++:
+```
+"code-runner.executorMap": {
+  "cpp": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat\" && cd $dir && cl $fileName /std:c++17 /nologo /EHsc /W4 /Fe:$fileNameWithoutExt.exe && $dir$fileNameWithoutExt.exe && DEL $dir$fileNameWithoutExt.exe && DEL $dir$fileNameWithoutExt.obj"
+  // "cpp": "g++ -std=c++17 $fullFileName -o $fileNameWithoutExt && $fileNameWithoutExt.exe && DEL $fileNameWithoutExt.exe"
+}
+```
+
+On Windows, using mingw:
+```
+"code-runner.executorMap": {
+  "cpp": "g++ -std=c++17 $fullFileName -o $fileNameWithoutExt && $fileNameWithoutExt.exe && DEL $fileNameWithoutExt.exe"
+}
+```
+
+The last configuration can easily be adapted to run on Linux.
 
 # Learning Resources
 
