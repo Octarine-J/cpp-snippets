@@ -57,7 +57,7 @@ The last configuration can easily be adapted to run on Linux.
 
 ## How to build a third-party library
 ```
-./configure --prefix=/usr/local/name-version
+./configure --prefix=/usr/local/libname-version
 make
 make install
 ```
@@ -67,7 +67,7 @@ To run an executable built against a third-party library:
 LD_LIBRARY_PATH=/usr/local/name-version/lib/ exe-name
 ```
 
-## Repository Setup
+## New Repository Setup
 
 ```
 git submodule add https://github.com/google/googletest.git

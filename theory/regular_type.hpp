@@ -1,12 +1,15 @@
 #ifndef SINGLETON_H
 #define SINGLETON_H
 
+/**
+ * A regular type is a type (class) that satisfies
+ * the following requirements.
+ */
 template <typename T>
-struct singleton
-{
+struct singleton {
     T value;
 
-    // semiregular type (1-4):
+    // Semiregular Type (1-4):
     
     // 1. copy constructor; must accept by a const ref (otherwise: non-ending recursion)
     singleton(const singleton& x) : value(x.value) {}
@@ -23,7 +26,7 @@ struct singleton
         return *this;
     }
 
-    // regular type (5-6):
+    // Regular Type (5-6):
     
     // 5. equality
     // note that this is NOT a member function
@@ -36,7 +39,7 @@ struct singleton
         return !(x == y);
     }
 
-    // totally ordered type (7-10):
+    // Totally Ordered Type (7-10):
  
     // 7. less then
     // all other comparisons are defined by using this operator
@@ -59,10 +62,11 @@ struct singleton
         return !(x < y);
     }
 
-    // conversions from T and to T
+    // Conversions from T and to T
     
     typedef T value_type;
 
+    // constructor
     explicit singleton(const T& x) : value(x) {}
 
     explicit operator T() const {
@@ -76,4 +80,3 @@ struct singleton
 };
 
 #endif
-

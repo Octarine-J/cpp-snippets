@@ -1,5 +1,5 @@
 #include <algorithm>
-#include "instrumented.h"
+#include "instrumented.hpp"
 
 double instrumented_base::counts[];
 
