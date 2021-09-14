@@ -63,12 +63,23 @@ TEST_CASE( "Find Any Value from a Set of Values" ) {
     REQUIRE( *it == 3 );
 }
 
-TEST_CASE( "Count Items that Match Criteria" ) {
+// count
+
+TEST_CASE( "Count Items by Equality" ) {
+    std::vector<std::string> positions = 
+        {"student", "employee", "student", "manager", "student"};
+
+    size_t num_students = std::count(positions.begin(), positions.end(), "student");
+
+    REQUIRE( num_students == 3 );
+}
+
+TEST_CASE( "Count Items by Criteria" ) {
     std::vector<int> v = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-    size_t result = std::count_if(v.begin(), v.end(), [](auto value) {
+    size_t num_even = std::count_if(v.begin(), v.end(), [](auto value) {
         return value % 2 == 0;
     });
 
-    REQUIRE( result == 4 );
+    REQUIRE( num_even == 4 );
 }

@@ -6,8 +6,8 @@ The repository also serves as a quick reminder for one who has not been working
 with C++ for a while.
 
 The most important directory (for now) is `shorts`. The most convenient way to work
-with it is to use Visual Studio Code. Each mini-app there can easily be run with
-the "Code Runner" plugin with the following configuration.
+with it is to use Visual Studio Code. Each mini-app or a test case there 
+can easily be run with the "Code Runner" plugin with the following configuration.
 
 On Windows, using VC++:
 ```
