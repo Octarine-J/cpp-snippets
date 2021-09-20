@@ -1,6 +1,6 @@
 # C++ Snippets
 This repository contains reusable snippets of C++ code to implement various
-tasks such as generating random numbers or creating templates.
+tasks such as generating random numbers or working with dates.
 
 The repository also serves as a quick reminder for one who has not been working
 with C++ for a while.
@@ -12,14 +12,14 @@ can easily be run with the "Code Runner" plugin with the following configuration
 On Windows, using VC++:
 ```
 "code-runner.executorMap": {
-  "cpp": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat\" && cd $dir && cl $fileName /std:c++17 /nologo /EHsc /W4 /Fe:$fileNameWithoutExt.exe && $dir$fileNameWithoutExt.exe && DEL $dir$fileNameWithoutExt.exe && DEL $dir$fileNameWithoutExt.obj"
+  "cpp": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat\" && cd $dir && cl $fileName /std:c++20 /nologo /EHsc /W4 /Fe:$fileNameWithoutExt.exe && $dir$fileNameWithoutExt.exe && DEL $dir$fileNameWithoutExt.exe && DEL $dir$fileNameWithoutExt.obj"
 }
 ```
 
 On Windows, using mingw:
 ```
 "code-runner.executorMap": {
-  "cpp": "g++ -std=c++17 $fullFileName -o $fileNameWithoutExt && $fileNameWithoutExt.exe && DEL $fileNameWithoutExt.exe"
+  "cpp": "g++ -std=c++20 $fullFileName -o $fileNameWithoutExt && $fileNameWithoutExt.exe && DEL $fileNameWithoutExt.exe"
 }
 ```
 
