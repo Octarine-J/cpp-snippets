@@ -5,8 +5,6 @@
 
 namespace alg {
 
-    // It is a RandomAccessIterator
-    // NOTE: this template uses C++20 concepts
     template<std::random_access_iterator It, typename Compare, typename T>
     It binary_search(T target, It begin, It end, Compare compare) {
         size_t low = 0;

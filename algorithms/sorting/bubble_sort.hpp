@@ -31,7 +31,7 @@ namespace alg::sorting {
         }
     }
 
-    template<typename Iterator>
+    template<std::bidirectional_iterator Iterator>
     void bubble_sort(Iterator begin, Iterator end) {
         bubble_sort(begin, end, std::less());
     }

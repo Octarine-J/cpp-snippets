@@ -25,8 +25,8 @@ namespace alg::sorting {
         }
     }
 
-    template<std::forward_iterator It>
-    void selection_sort(It begin, It end) {
+    template<std::bidirectional_iterator Iterator>
+    void selection_sort(Iterator begin, Iterator end) {
         return selection_sort(begin, end, std::less());
     }
 }

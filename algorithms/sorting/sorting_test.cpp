@@ -3,6 +3,7 @@
 #include <list>
 #include "bubble_sort.hpp"
 #include "insertion_sort.hpp"
+#include "quick_sort.hpp"
 #include "selection_sort.hpp"
 
 #define CATCH_CONFIG_MAIN
@@ -22,6 +23,8 @@ private:
             {{3, 2, 1}, {1, 2, 3}},
             {{1, 2, 3}, {1, 2, 3}},
             {{1, 3, 2}, {1, 2, 3}},
+            {{1, 2, 3, 4}, {1, 2, 3, 4}},
+            {{4, 3, 2, 1}, {1, 2, 3, 4}},
             {{3, 1, 7, 2, 4, 5, 9, 8, 6}, {1, 2, 3, 4, 5, 6, 7, 8, 9}},
             {{1, 3, 3, 2, 1, 2}, {1, 1, 2, 2, 3, 3}}
     };
@@ -72,4 +75,9 @@ TEST_CASE_METHOD( SortingTestFixture, "InsertionSort" ) {
 TEST_CASE_METHOD( SortingTestFixture, "SelectionSort" ) {
     test_sorting(alg::sorting::selection_sort);
     random_test_sorting(alg::sorting::selection_sort);
+}
+
+TEST_CASE_METHOD( SortingTestFixture, "QuickSort" ) {
+    test_sorting(alg::sorting::quick_sort);
+    random_test_sorting(alg::sorting::quick_sort);
 }

@@ -33,7 +33,7 @@ namespace alg::sorting {
         }
     }
 
-    template<typename Iterator>
+    template<std::bidirectional_iterator Iterator>
     void insertion_sort(Iterator begin, Iterator end) {
         insertion_sort(begin, end, std::less());
     }
