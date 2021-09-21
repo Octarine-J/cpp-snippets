@@ -1,7 +1,9 @@
 #include <random>
 #include <vector>
+#include <list>
 #include "bubble_sort.hpp"
 #include "insertion_sort.hpp"
+#include "selection_sort.hpp"
 
 #define CATCH_CONFIG_MAIN
 #include "../../include/catch.hpp"
@@ -58,11 +60,16 @@ public:
 };
 
 TEST_CASE_METHOD( SortingTestFixture, "BubbleSort" ) {
-    test_sorting(sorting::bubble_sort);
-    random_test_sorting(sorting::bubble_sort);
+    test_sorting(alg::sorting::bubble_sort);
+    random_test_sorting(alg::sorting::bubble_sort);
 }
 
 TEST_CASE_METHOD( SortingTestFixture, "InsertionSort" ) {
-    test_sorting(sorting::insertion_sort);
-    random_test_sorting(sorting::insertion_sort);
+    test_sorting(alg::sorting::insertion_sort);
+    random_test_sorting(alg::sorting::insertion_sort);
+}
+
+TEST_CASE_METHOD( SortingTestFixture, "SelectionSort" ) {
+    test_sorting(alg::sorting::selection_sort);
+    random_test_sorting(alg::sorting::selection_sort);
 }

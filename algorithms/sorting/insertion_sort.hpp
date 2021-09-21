@@ -1,21 +1,27 @@
 #pragma once
 
 #include <functional>
+#include <iterator>
 
-namespace sorting {
+/** 
+ * Insertion Sort.
+ * Works on vectors, lists.
+ * Average: O(n^2), Best: O(n), Worst: O(n^2)
+ */
+namespace alg::sorting {
 
-    template<typename Iterator, typename Compare>
+    template<std::bidirectional_iterator Iterator, typename Compare>
     void insertion_sort(Iterator begin, Iterator end, Compare compare) {
         if (begin == end) {
             return;
         }
 
-        for (auto it = begin + 1; it != end; ++it) {
-            auto pos = it;
+        for (Iterator it = std::next(begin); it != end; ++it) {
+            Iterator pos = it;
             auto value = std::move(*it);
 
-            while (compare(value, *(pos - 1))) {
-                *pos = std::move(*(pos - 1));
+            while (compare(value, *(std::prev(pos)))) {
+                *pos = std::move(*(std::prev(pos)));
                 --pos;
 
                 if (pos == begin) {
