@@ -33,6 +33,14 @@ namespace ds {
         T& operator()(size_t i, size_t j) {
             return values[i * m + j];
         }
+
+        void set_row(size_t i, T value) {
+            size_t j = i * m;
+            size_t j_max = (i + 1) * m;
+            for (; j < j_max; ++j) {
+                values[j] = value;
+            }
+        }
     };
 
 }

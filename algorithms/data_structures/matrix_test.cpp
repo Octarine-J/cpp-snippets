@@ -65,3 +65,29 @@ TEST_CASE( "2x2 Matrix" ) {
     REQUIRE( b(1, 1) == 100 );
 }
 
+TEST_CASE( "Matrix - Set Row" ) {
+    const size_t max_rows = 3;
+    const size_t max_cols = 3;
+    const int init_value = 100;
+    const int updated_value = 200;
+
+    // test all sizes from 1x1 to 3x3
+    for (size_t num_rows = 1; num_rows <= max_rows; ++num_rows) {
+        for (size_t num_cols = 1; num_cols <= max_cols; ++num_cols) {
+            for (size_t row_to_set = 0; row_to_set < num_rows; ++row_to_set) {
+                ds::matrix<int> a(num_rows, num_cols, init_value);
+                a.set_row(row_to_set, updated_value);
+
+                for (size_t i = 0; i < num_rows; ++i) {
+                    for (size_t j = 0; j < num_cols; ++j) {
+                        if (i == row_to_set) {
+                            REQUIRE( a(i, j) == updated_value );
+                        } else {
+                            REQUIRE( a(i, j) == init_value );
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
