@@ -6,7 +6,7 @@ using namespace std::complex_literals;
 using namespace std::string_literals;
 
 // user defined cooked literal
-double operator"" _in(long double value) {
+long double operator"" _in(long double value) {
     return value * 25.4; // mm
 }
 
@@ -29,8 +29,9 @@ int main() {
     char16_t w2 = u'a';          // utf-16
     char32_t w3 = U'a';          // utf-32
 
-    char s1[] = u8"日本語"; // utf-8 string (char)
-    std::cout << s1 << std::endl;
+    // C++20:  std::u8string, before:  std::string
+    // std::u8string is not printable
+    std::u8string s1 = u8"日本語"; // utf-8 string (char)
 
     // string literal that spans multiple lines
     std::cout << "a long long line"

@@ -33,7 +33,6 @@ The last configuration can easily be adapted to run on Linux.
 - [C++Now](https://www.youtube.com/user/BoostCon/playlists)
 - [ACCU Conference](https://www.youtube.com/channel/UCJhay24LTpO1s4bIZxuIqKw/featured)
 - [Microsoft Build *](https://www.youtube.com/channel/UCsMica-v34Irf9KVTh6xx-g/playlists?view=50&sort=dd&shelf_id=16)
-- [C++ Russia](https://www.youtube.com/channel/UCJ9v015sPgEi0jJXe_zanjA)
 
 ## References
 

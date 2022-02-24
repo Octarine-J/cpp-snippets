@@ -11,8 +11,11 @@ int main() {
     char32_t e = U'e'; // same
     std::cout << a << " " << b << std::endl;
     std::wcout << " " << c << std::endl;
-    std::cout << d << " " << e << std::endl; // no built-in support to output Unicode
+    
+    // no built-in support to output Unicode:
+    //std::cout << d << " " << e << std::endl;  // doesn't compile with MSVC
 
+    // integral types
     short f = 32267;
     int g = 32267;                     // at least 16 bits
     long h = 3000000000;               // at least 32 bits
@@ -31,8 +34,10 @@ int main() {
 
     // can also check whether char is signed or not on our platform
     bool char_is_signed = std::numeric_limits<char>::is_signed;
+    std::cout << "char is signed: " << 
+        (char_is_signed ? "true" : "false") << std::endl;
 
-    // signed values are automatically promoted to unsigned
+    // WARNING: signed values are automatically promoted to unsigned
     // when both signed and unsigned types are used in the same expression
     // this may yield surprising results!
     int s = -10;
