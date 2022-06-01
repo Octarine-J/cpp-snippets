@@ -23,7 +23,12 @@ On Windows, using mingw:
 }
 ```
 
-The last configuration can easily be adapted to run on Linux.
+On Linux, using GCC:
+```
+"code-runner.executorMap": {
+  "cpp": "g++ -lstdc++ --std=c++17 $fullFileName && ./a.out && rm ./a.out"
+}
+```
 
 # Learning Resources
 
@@ -64,6 +69,25 @@ make install
 To run an executable built against a third-party library:
 ```
 LD_LIBRARY_PATH=/usr/local/name-version/lib/ exe-name
+```
+
+## How to link against a library
+
+Linking against a static `.a` library:
+```
+g++ source.cpp /path/to/libmy.a
+```
+
+Linking against a shared library in a standard location:
+```
+# against libm.so
+g++ source.cpp -lm
+```
+
+Linking against a custom shared library:
+```
+# against libX11.so
+g++ source.cpp -L/path/to/libs/ -lX11
 ```
 
 ## New Repository Setup
