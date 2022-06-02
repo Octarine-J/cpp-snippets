@@ -90,6 +90,22 @@ Linking against a custom shared library:
 g++ source.cpp -L/path/to/libs/ -lX11
 ```
 
+The list of standard locations to search for libraries is
+in `/etc/ld.so.conf`. If this file is modified, `ldconfig`
+needs to be run to process the changes.
+
+## How to analyze libraries and binaries
+
+To list all functions in a library or compiled executable, run
+```
+nm library.a
+```
+
+To see which shared libraries are required by an executable, run
+```
+ldd my_app
+```
+
 ## New Repository Setup
 
 ```

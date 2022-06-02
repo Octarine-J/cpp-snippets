@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# -c to not look for main()
+# -c to skip linking phase (it would fail as there is no main)
 g++ -c foo.cpp bar.cpp
 
 # create a library from object files
