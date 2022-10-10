@@ -1,15 +1,15 @@
 #include <functional>
+#include <stdexcept>
 #include <vector>
 
-#define CATCH_CONFIG_MAIN
-#include "../../include/catch.hpp"
+#include <catch2/catch_test_macros.hpp>
 
 
 // Vector may invalidate all iterators on insert
 // Vector invalidates the current and all next iterators on erase
 
 TEST_CASE( "Access Vector Elements" ) {
-    std::vector<int> v = {4, 5, 6, 7, 8};
+    std::vector<int> v {4, 5, 6, 7, 8};
 
     REQUIRE( v.front() == 4 );  // first element
     REQUIRE( v.back() == 8 );   // last element
@@ -21,16 +21,10 @@ TEST_CASE( "Access Vector Elements" ) {
 }
 
 TEST_CASE( "Access Vector Elements with Range Check" ) {
-    std::vector<int> v = {1, 2, 3};
-    bool caught_exception = false;
+    std::vector<int> v {1, 2, 3};
 
-    try {
-        v.at(3);  // at does range checks
-    } catch (const std::out_of_range& e) {
-        caught_exception = true;
-    }
-
-    REQUIRE( caught_exception );
+    // at does range checks
+    REQUIRE_THROWS_AS( v.at(3), std::out_of_range );
 }
 
 TEST_CASE( "Create a Vector" ) {
@@ -55,14 +49,14 @@ TEST_CASE( "Create a Vector" ) {
     REQUIRE( w[1] == 255 );
 
     // as a partial copy of an array
-    int arr[] = {1, 2, 3, 4, 5, 6};
+    int arr[] {1, 2, 3, 4, 5, 6};
     std::vector<int> z(arr + 1, arr + 4);
     REQUIRE( z.front() == 2 );
     REQUIRE( z.back() == 4 );
 }
 
 TEST_CASE( "Reuse a Vector (Assign)" ) {
-    std::vector<int> v = {2, 4, 6, 8, 10, 12};
+    std::vector<int> v {2, 4, 6, 8, 10, 12};
     size_t old_capacity = v.capacity();
 
     REQUIRE( v.size() == 6 );
@@ -88,17 +82,17 @@ TEST_CASE( "Exchange Contents of Two Vectors in O(1)" ) {
 }
 
 TEST_CASE( "Compare Vectors" ) {
-    std::vector<int> x = {1, 2, 3};
-    std::vector<int> y = {1, 2, 3};
-    std::vector<int> z = {1, 2, 4};
+    std::vector<int> x {1, 2, 3};
+    std::vector<int> y {1, 2, 3};
+    std::vector<int> z {1, 2, 4};
 
     REQUIRE( x == y );
     REQUIRE( x < z );
 }
 
 TEST_CASE( "Vector of References" ) {
-    std::string s1 = "hello";
-    std::string s2 = "world";
+    std::string s1 {"hello"};
+    std::string s2 {"world"};
 
     std::vector<std::reference_wrapper<std::string>> v = { std::ref(s1), std::ref(s2) };
 
@@ -108,7 +102,7 @@ TEST_CASE( "Vector of References" ) {
 }
 
 TEST_CASE( "Add Values to a Vector" ) {
-    std::vector v = {1, 2};
+    std::vector v {1, 2};
 
     v.push_back(3);
     REQUIRE( v.back() == 3 );
@@ -130,7 +124,7 @@ TEST_CASE( "Add Values to a Vector" ) {
     REQUIRE( v[n] == 11 );
 
     // insert all elements from another vector
-    std::vector<int> z = {100, 200, 300};
+    std::vector<int> z {100, 200, 300};
     v.insert(v.cend(), z.cbegin(), z.cend());
     REQUIRE( v.back() == 300 );
 
@@ -141,7 +135,7 @@ TEST_CASE( "Add Values to a Vector" ) {
 }
 
 TEST_CASE( "Removes Values from a Vector" ) {
-    std::vector<int> v = {1, 2, 3, 4, 5};
+    std::vector<int> v {1, 2, 3, 4, 5};
 
     // erase elements from 1 (inclusive) to 3 (exclusive)
     v.erase(v.cbegin() + 1, v.cbegin() + 3);
@@ -155,7 +149,7 @@ TEST_CASE( "Removes Values from a Vector" ) {
 }
 
 TEST_CASE( "Change All Elements in a Vector" ) {
-    std::vector<int> v = {1, 2, 3};
+    std::vector<int> v {1, 2, 3};
 
     for (auto& value : v) {
         value *= 2;

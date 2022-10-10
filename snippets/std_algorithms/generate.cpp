@@ -3,12 +3,12 @@
 #include <numeric>
 #include <vector>
 
-#define CATCH_CONFIG_MAIN
-#include "../../include/catch.hpp"
+#include <catch2/catch_test_macros.hpp>
+
 
 TEST_CASE( "Generate" ) {
     // replaces the value in a container
-    std::array<int, 5> a;
+    std::array<int, 5> a {};
 
     int x = 1;
     std::generate(a.begin(), a.end(), [&x]{
@@ -16,6 +16,7 @@ TEST_CASE( "Generate" ) {
     });
 
     REQUIRE( a == std::array<int, 5>{2, 4, 8, 16, 32} );
+    REQUIRE( x == 32 );  // note that x changes
 }
 
 TEST_CASE( "Iota" ) {
