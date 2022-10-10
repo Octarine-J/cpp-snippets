@@ -1,8 +1,8 @@
 #include <set>
 #include <vector>
 
-#define CATCH_CONFIG_MAIN
-#include "../../include/catch.hpp"
+#include <catch2/catch_test_macros.hpp>
+
 
 TEST_CASE( "Set Usage" ) {
     std::set<int> ids;
@@ -14,7 +14,7 @@ TEST_CASE( "Set Usage" ) {
     REQUIRE( ids.count(100) == 1);
 
     // add multiple elements
-    std::vector<int> digits = {1, 2, 3};
+    std::vector<int> digits {1, 2, 3};
     ids.insert(digits.begin(), digits.end());
 
     REQUIRE( ids.size() == 4 );
@@ -27,7 +27,7 @@ TEST_CASE( "Set Usage" ) {
 }
 
 TEST_CASE( "Insert an Element and Check the Result" ) {
-    std::vector<int> v = {1, 2, 3, 1, 3, 4};
+    std::vector<int> v {1, 2, 3, 1, 3, 4};
     std::set<int> unique_values;
     std::set<int> duplicates;
 

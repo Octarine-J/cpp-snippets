@@ -1,16 +1,14 @@
 #include <map>
 
-#define CATCH_CONFIG_MAIN
-#include "../../include/catch.hpp"
+#include <catch2/catch_test_macros.hpp>
 
 /**
  * map is implemented using black-red balanced search tree; insert, delete, lookup: O(log n)
  * it is sorted based on operator<
  * hence implementing operator< is essential for custom keys
  */
-
 TEST_CASE( "Search in Map" ) {
-    std::map<int, std::string> numbers = {
+    std::map<int, std::string> numbers {
             {1, "one"},
             {2, "two"},
             {3, "three"}
@@ -20,7 +18,7 @@ TEST_CASE( "Search in Map" ) {
     REQUIRE( numbers[2] =="two" );
 
     // operator[] inserts a default value if an element is not found!
-    REQUIRE( numbers[10] == "" );
+    REQUIRE( numbers[10].empty() );
     REQUIRE( numbers.size() == 4 );
 
     // use find() to avoid creating new elements
@@ -43,13 +41,13 @@ TEST_CASE( "Insert into Map does not Override Values" ) {
 
     // C++17: new method to allow overriding values
     ids.insert_or_assign("John", 30);  // NOTE: different signature
-    
+
     REQUIRE( ids["John"] == 30 );
 }
 
 
 TEST_CASE( "Update a Value in Map" ) {
-    std::map<int, std::string> numbers = {
+    std::map<int, std::string> numbers {
             {1, "one"},
             {2, "two"},
             {3, "three"}
@@ -57,7 +55,7 @@ TEST_CASE( "Update a Value in Map" ) {
 
     // first find the element
     auto it = numbers.find(2);
-    
+
     REQUIRE( it != numbers.cend() );
 
     // then update the value using the iterator pointing to the element
@@ -68,7 +66,7 @@ TEST_CASE( "Update a Value in Map" ) {
 
 
 TEST_CASE( "Remove a Value from Map" ) {
-    std::map<int, std::string> numbers = {
+    std::map<int, std::string> numbers {
             {1, "one"},
             {2, "two"},
             {3, "three"}
@@ -85,23 +83,23 @@ TEST_CASE( "Remove a Value from Map" ) {
 
 
 TEST_CASE( "Using Map in a For-Loop" ) {
-    std::map<std::string, std::string> animals = {
-        {"cat", "White"},
-        {"dog", "Spot"}
+    std::map<std::string, std::string> animals {
+            {"cat", "White"},
+            {"dog", "Spot"}
     };
 
     for (const auto& [animal, name] : animals) {
-        REQUIRE( animal == "cat" || animal == "dog" );
-        REQUIRE( name == "White" || name == "Spot" );
+        REQUIRE( (animal == "cat" or animal == "dog") );
+        REQUIRE( (name == "White" or name == "Spot") );
     }
 }
 
 
 TEST_CASE( "Move Nodes between Maps" ) {
-    std::map<std::string, int> deptA = {
-        {"John", 10},
-        {"Kevin", 11},
-        {"Sebastian", 12}
+    std::map<std::string, int> deptA {
+            {"John", 10},
+            {"Kevin", 11},
+            {"Sebastian", 12}
     };
 
     std::map<std::string, int> deptB;
@@ -116,6 +114,6 @@ TEST_CASE( "Move Nodes between Maps" ) {
     // move ALL nodes (nodes that cannot be merged remain in the old map)
     deptB.merge(deptA);
 
-    REQUIRE( deptA.size() == 0);
+    REQUIRE( deptA.empty() );
     REQUIRE( deptB.size() == 3);
 }

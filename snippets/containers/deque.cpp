@@ -1,12 +1,12 @@
 #include <deque>
 
-#define CATCH_CONFIG_MAIN
-#include "../../include/catch.hpp"
+#include <catch2/catch_test_macros.hpp>
+
 
 // Deque DOES NOT invalidate iterators on insert to front/back
 
 TEST_CASE( "Add and Remove from Deque" ) {
-    std::deque<int> q = {1, 2, 3};
+    std::deque<int> q {1, 2, 3};
 
     q.push_front(4);  // O(1), same as push_back
     q.pop_back();

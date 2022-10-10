@@ -1,8 +1,8 @@
 #include <bitset>
 #include <sstream>
 
-#define CATCH_CONFIG_MAIN
-#include "../../include/catch.hpp"
+#include <catch2/catch_test_macros.hpp>
+
 
 TEST_CASE( "Set and Test Flags" ) {
     std::bitset<8> flags;
@@ -13,8 +13,10 @@ TEST_CASE( "Set and Test Flags" ) {
 
     // check if a value is set
     REQUIRE( flags.test(3) );
+    REQUIRE( flags.test(6) );
+    REQUIRE( ! flags.test(7) );
 
-    // output
+    // output to string
     std::stringstream ss;
     ss << flags;
 
@@ -26,8 +28,8 @@ TEST_CASE( "BitSet operators" ) {
     // bitset supports all bit operators:
     // &, |, ^, ~, <<, >>, &=, |=, ^=, <<=, >>=
 
-    std::bitset<4> s1("0111");
-    std::bitset<4> s2("1010");
+    std::bitset<4> s1 {"0111"};
+    std::bitset<4> s2 {"1010"};
 
     auto s3 = s1 & s2;
 

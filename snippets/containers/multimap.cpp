@@ -1,19 +1,17 @@
 #include <map>
 
-#define CATCH_CONFIG_MAIN
-#include "../../include/catch.hpp"
+#include <catch2/catch_test_macros.hpp>
 
 /**
  * multimap allows storing multiple values
  * associated with the same key
  */
-
 TEST_CASE( "MultiMap Allows Multiple Values with the Same Key" ) {
-    std::multimap<int, std::string> numbers = {
-        {1, "one"},
-        {1, "ein"},
-        {2, "two"},
-        {2, "zwei"}
+    std::multimap<int, std::string> numbers {
+            {1, "one"},
+            {1, "ein"},
+            {2, "two"},
+            {2, "zwei"}
     };
 
     // get all values by key
@@ -23,6 +21,6 @@ TEST_CASE( "MultiMap Allows Multiple Values with the Same Key" ) {
 
     for (auto it = begin; it != end; ++it) {
         REQUIRE( it->first == 2 );
-        REQUIRE( it->second == "two" || it->second == "zwei" );
+        REQUIRE( (it->second == "two" or it->second == "zwei") );
     }
 }

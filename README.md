@@ -12,7 +12,7 @@ can easily be run with the "Code Runner" plugin with the following configuration
 On Windows, using VC++:
 ```
 "code-runner.executorMap": {
-  "cpp": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat\" && cd $dir && cl $fileName /std:c++20 /nologo /EHsc /W4 /Fe:$fileNameWithoutExt.exe && $dir$fileNameWithoutExt.exe && DEL $dir$fileNameWithoutExt.exe && DEL $dir$fileNameWithoutExt.obj"
+  "cpp": "\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat\" && cd $dir && cl $fileName /std:c++20 /nologo /EHsc /W4 /Fe:$fileNameWithoutExt.exe && $dir$fileNameWithoutExt.exe && DEL $dir$fileNameWithoutExt.exe && DEL $dir$fileNameWithoutExt.obj"
 }
 ```
 
@@ -28,28 +28,27 @@ The last configuration can easily be adapted to run on Linux.
 # Learning Resources
 
 ## Conferences
-
 - [CppCon](https://www.youtube.com/user/CppCon/playlists)
 - [C++Now](https://www.youtube.com/user/BoostCon/playlists)
 - [ACCU Conference](https://www.youtube.com/channel/UCJhay24LTpO1s4bIZxuIqKw/featured)
 - [Microsoft Build *](https://www.youtube.com/channel/UCsMica-v34Irf9KVTh6xx-g/playlists?view=50&sort=dd&shelf_id=16)
 
 ## References
-
 - [C++ Reference](https://en.cppreference.com/w/)
+- [Another C++ Reference](https://cplusplus.com/reference/)
 - [C++ Standard Draft (Web)](https://eel.is/c++draft/)
-
-## Podcasts
-
-- [C++ Cast](http://cppcast.com/)
+- [Standard Features Support by Compilers](https://en.cppreference.com/w/cpp/compiler_support)
 
 ## Guidelines
-
 - [C++ Core Guidelines](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md)
+- [C++ FAQ](https://isocpp.org/faq)
 
 ## Game Engines
 - [Godot](https://godotengine.org/download)
 - [LibGDX](https://libgdx.badlogicgames.com/)
+
+## Podcasts
+- [C++ Cast](http://cppcast.com/)
 
 
 # HOWTOs
