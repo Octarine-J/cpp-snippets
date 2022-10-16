@@ -1,7 +1,24 @@
 #include <charconv>
 
-#define CATCH_CONFIG_MAIN
-#include "../../include/catch.hpp"
+#include <catch2/catch_test_macros.hpp>
+
+
+// High-level conversions
+
+TEST_CASE( "Numbers to String" ) {
+    REQUIRE( std::to_string(12345) == "12345" );
+    REQUIRE( std::to_string(1.23e+3) == "1230.000000" );
+}
+
+TEST_CASE( "String to Int" ) {
+    REQUIRE( std::stoi("12345") == 12345 );
+    REQUIRE( std::stoi("0xa", nullptr, 16) == 10 );
+    REQUIRE( std::stoi("  00100 ", nullptr, 2) == 4 );
+}
+
+TEST_CASE( "String to Double" ) {
+    REQUIRE( std::stod("3.1415") == 3.1415 );
+}
 
 
 // C++17: Low-level conversions
@@ -52,21 +69,4 @@ TEST_CASE( "Low Level Conversion: StrToInt (Failure due to Leading Whitespace)" 
     auto result = std::from_chars(buffer.data(), buffer.data() + buffer.size(), value);
 
     REQUIRE( result.ec == std::errc::invalid_argument );
-}
-
-// High-level conversions
-
-TEST_CASE( "Numbers to String" ) {
-    REQUIRE( std::to_string(12345) == "12345" );
-    REQUIRE( std::to_string(1.23e+3) == "1230.000000" );
-}
-
-TEST_CASE( "String to Int" ) {
-    REQUIRE( std::stoi("12345") == 12345 );
-    REQUIRE( std::stoi("0xa", nullptr, 16) == 10 );
-    REQUIRE( std::stoi("  00100 ", nullptr, 2) == 4 );
-}
-
-TEST_CASE( "String to Float" ) {
-    REQUIRE( std::stod("3.1415") == 3.1415 );
 }

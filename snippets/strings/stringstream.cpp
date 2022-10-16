@@ -1,24 +1,23 @@
 #include <iomanip>
-#include <iostream>
 #include <sstream>
 
-int main() {
+#include <catch2/catch_test_macros.hpp>
+
+
+TEST_CASE( "Formatting With String Stream" ) {
     std::string name = "John";
     double salary = 5000.927;
 
-    std::string s;
-
     // can't add a string to a double:
-    //s = name + ": " + salary;
+    // std::string result = name + ": " + salary;
 
     // so we use a string stream
     std::stringstream ss;
+
     // fixed: use non-scientific notation for numbers (5000, not 5e+3)
     // setprecision: number of digits after the point
     ss << name << ": " << std::fixed << std::setprecision(2) << salary;
-    s = ss.str();
+    std::string result = ss.str();
 
-    std::cout << s << std::endl;
-
-    return 0;
+    REQUIRE( result == "John: 5000.93" );
 }

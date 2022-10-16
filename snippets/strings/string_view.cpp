@@ -1,9 +1,8 @@
-#include <iostream>
 #include <string_view>
 #include <vector>
 
-#define CATCH_CONFIG_MAIN
-#include "../../include/catch.hpp"
+#include <catch2/catch_test_macros.hpp>
+
 
 std::vector<std::string_view> tokenize(std::string_view sentence, char separator) {
     std::vector<std::string_view> result;
