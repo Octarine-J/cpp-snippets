@@ -1,13 +1,12 @@
 #include <random>
 #include <vector>
-#include <list>
 #include "bubble_sort.hpp"
 #include "insertion_sort.hpp"
 #include "quick_sort.hpp"
 #include "selection_sort.hpp"
 
-#define CATCH_CONFIG_MAIN
-#include "../../include/catch.hpp"
+#include <catch2/catch_test_macros.hpp>
+
 
 template <typename Iterator>
 using SortingAlgorithm = void (*)(Iterator, Iterator);

@@ -1,7 +1,7 @@
 #include "binary_counter.hpp"
 
-#define CATCH_CONFIG_MAIN
-#include "../../include/catch.hpp"
+#include <catch2/catch_test_macros.hpp>
+
 
 template <typename Iterator, typename Compare>
 Iterator min_element_binary(Iterator first, Iterator last, Compare compare) {

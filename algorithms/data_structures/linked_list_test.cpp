@@ -1,10 +1,10 @@
 #include <numeric>
 #include "linked_list.hpp"
 
-#define CATCH_CONFIG_MAIN
-#include "../../include/catch.hpp"
+#include <catch2/catch_test_macros.hpp>
 
-TEST_CASE( "Add First and Add Last" ) {
+
+TEST_CASE( "Add First and Add Last in Linked List" ) {
     ds::LinkedList<int> list;
     REQUIRE( 0 == list.size() );
 
@@ -40,7 +40,7 @@ TEST_CASE( "Add First and Add Last" ) {
     REQUIRE( 3 == list[4] );
 }
 
-TEST_CASE ( "Remove" ) {
+TEST_CASE ( "Remove Element in Linked List" ) {
     ds::LinkedList<int> list;
     REQUIRE_THROWS_AS( list.remove_first(), std::invalid_argument );
 
@@ -52,28 +52,28 @@ TEST_CASE ( "Remove" ) {
     REQUIRE( 1 == list.top() );
 }
 
-TEST_CASE( "Empty" ) {
+TEST_CASE( "Empty Linked List" ) {
     ds::LinkedList<int> list;
     REQUIRE( 0 == list.size());
     REQUIRE_THROWS_AS( list[0], std::invalid_argument );
     REQUIRE_THROWS_AS( list.top(), std::invalid_argument );
 }
 
-TEST_CASE( "ForEach" ) {
+TEST_CASE( "ForEach Element in Linked List" ) {
     ds::LinkedList<int> list = {3, 1, 2};
 
     int sum = std::accumulate(list.begin(), list.end(), 0);
     REQUIRE( 6 == sum );
 }
 
-TEST_CASE( "ForEachEmpty" ) {
+TEST_CASE( "ForEach Element in Empty Linked List" ) {
     ds::LinkedList<int> list;
 
     int sum = std::accumulate(list.begin(), list.end(), 0);
     REQUIRE( 0 == sum );
 }
 
-TEST_CASE( "Reverse" ) {
+TEST_CASE( "Reverse Linked List" ) {
     ds::LinkedList<int> list = {1, 2, 3, 4, 5};
 
     list.reverse();
@@ -91,7 +91,7 @@ TEST_CASE( "Reverse" ) {
     REQUIRE( 7 == list[6] );
 }
 
-TEST_CASE( "ReverseEmpty" ) {
+TEST_CASE( "Reverse Empty Linked List" ) {
     ds::LinkedList<int> list;
 
     list.reverse();

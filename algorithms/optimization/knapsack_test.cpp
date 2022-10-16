@@ -1,9 +1,8 @@
 #include "knapsack.hpp"
-
-#define CATCH_CONFIG_MAIN
-#include "../../include/catch.hpp"
-
 using namespace alg::opt::knapsack;
+
+#include <catch2/catch_test_macros.hpp>
+
 
 TEST_CASE( "Knapsack - No Items" ) {
     std::vector<item> items = {};
@@ -61,7 +60,7 @@ TEST_CASE( "Knapsack - One Item That Does Not Fit" ) {
     solution sol = optimal_fit(items, 4);
 
     REQUIRE( sol.max_value == 0 );
-    REQUIRE( sol.pos == std::vector<size_t>{} );
+    REQUIRE( sol.pos.empty() );
 }
 
 TEST_CASE( "Knapsack - One Item That Fits" ) {

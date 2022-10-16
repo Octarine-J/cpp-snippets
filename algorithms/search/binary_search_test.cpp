@@ -1,12 +1,10 @@
 #include <algorithm>
-#include <functional>
 #include <vector>
-#include <list>
 #include "../../apps/datagen/include/random.hpp"
 #include "binary_search.hpp"
 
-#define CATCH_CONFIG_MAIN
-#include "../../include/catch.hpp"
+#include <catch2/catch_test_macros.hpp>
+
 
 TEST_CASE( "Binary Search - Empty" ) {
     std::vector<int> v;

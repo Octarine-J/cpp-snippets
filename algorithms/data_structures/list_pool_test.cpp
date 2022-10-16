@@ -1,9 +1,9 @@
 #include "list_pool.hpp"
 
-#define CATCH_CONFIG_MAIN
-#include "../../include/catch.hpp"
+#include <catch2/catch_test_macros.hpp>
 
-TEST_CASE( "Create" ) {
+
+TEST_CASE( "Create List Pool" ) {
     ds::ListPool<char> pool;
 
     auto pos_a = pool.allocate('a', 0);
@@ -21,7 +21,7 @@ TEST_CASE( "Create" ) {
     REQUIRE( pos_b == pool.next(pos_c) );
 }
 
-TEST_CASE( "FreeList" ) {
+TEST_CASE( "Free List" ) {
     ds::ListPool<char> pool;
     auto pos_a = pool.allocate('a', 0);
     auto pos_b = pool.allocate('b', pos_a);

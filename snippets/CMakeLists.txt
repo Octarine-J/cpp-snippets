@@ -16,7 +16,7 @@ set(SOURCES
         containers/any.cpp
         containers/bitset.cpp
         containers/deque.cpp
-        containers/list.cpp containers/map.cpp containers/multimap.cpp containers/priority_queue.cpp containers/set.cpp numbers/arithmetic.cpp strings/regex.cpp containers/vector.cpp std_algorithms/search.cpp std_algorithms/generate.cpp std_algorithms/mapping.cpp std_algorithms/reduce.cpp containers/array.cpp)
+        containers/list.cpp containers/map.cpp containers/multimap.cpp containers/priority_queue.cpp containers/set.cpp numbers/arithmetic.cpp strings/regex.cpp containers/vector.cpp std_algorithms/search.cpp std_algorithms/generate.cpp std_algorithms/mapping.cpp std_algorithms/reduce.cpp containers/array.cpp containers/optional.cpp containers/tuple.cpp containers/pair.cpp containers/unordered_map.cpp core_language/iterators.cpp)
 
 add_executable(all-tests ${SOURCES})
 target_link_libraries(all-tests PRIVATE Catch2::Catch2WithMain)
