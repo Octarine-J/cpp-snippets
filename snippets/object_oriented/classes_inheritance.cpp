@@ -1,12 +1,14 @@
-#include <iostream>
+#include <catch2/catch_test_macros.hpp>
 
 class Animal {
 protected:
+    [[nodiscard]]
     virtual std::string get_description() const {
         return "animal";
     }
 public:
-    virtual std::string greet() const = 0;
+    [[nodiscard]]
+    virtual std::string greet() const = 0;  // pure virtual method
 
     // abstract classes must always have the virtual destructor;
     // copy assignment operator and copy constructor,
@@ -17,12 +19,14 @@ public:
     void sleep() {}
 };
 
-class Cat final : public Animal { 
+class Cat final : public Animal {
 public:
+    [[nodiscard]]
     std::string greet() const override {
         return "meow!";
     }
 
+    [[nodiscard]]
     std::string get_description() const override {
         // call superclass implementation
         return Animal::get_description() + " (cat)";
@@ -34,15 +38,16 @@ public:
     using Animal::sleep;  // it pulls all overloads with the same name at once
 };
 
-int main() {
+TEST_CASE( "Class Hierarchy" ) {
     Cat cat;
-    std::cout << cat.get_description() << std::endl;
     cat.sleep();
 
+    REQUIRE( cat.get_description() == "animal (cat)" );
+
     Animal& animal = cat;
-    std::cout << animal.greet() << std::endl;
+    REQUIRE( animal.greet() == "meow!" );
 
     // typeid operator (a class must have vtable)
-    std::cout << "Animal is a cat: " << (typeid(animal) == typeid(Cat)) << std::endl;
-    std::cout << "Animal is a " << typeid(animal).name() << "." << std::endl;
+    REQUIRE( typeid(animal) == typeid(Cat) );
+    REQUIRE( typeid(animal).name() == std::string("class Cat") );
 }

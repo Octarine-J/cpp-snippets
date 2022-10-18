@@ -12,8 +12,17 @@ TEST_CASE( "Numbers to String" ) {
 
 TEST_CASE( "String to Int" ) {
     REQUIRE( std::stoi("12345") == 12345 );
-    REQUIRE( std::stoi("0xa", nullptr, 16) == 10 );
-    REQUIRE( std::stoi("  00100 ", nullptr, 2) == 4 );
+    REQUIRE( std::stoi("0xa", nullptr, 16) == 10 );  // hex
+    REQUIRE( std::stoi("  00100 ", nullptr, 2) == 4 );  // bin
+
+    // partial conversion
+    size_t pos = -1;
+    REQUIRE( std::stoi("12eur", &pos) == 12 );
+    REQUIRE( pos == 2 );  // position of the first not converted character
+}
+
+TEST_CASE( "String to Unsigned Long Long" ) {
+    REQUIRE( std::stoull("9000000000000") == 9000000000000ull );
 }
 
 TEST_CASE( "String to Double" ) {
@@ -22,6 +31,7 @@ TEST_CASE( "String to Double" ) {
 
 
 // C++17: Low-level conversions
+// they are low-level, because no memory is allocated (a buffer is required)
 
 TEST_CASE( "Low Level Conversion: IntToStr" ) {
     int value = 1234567;

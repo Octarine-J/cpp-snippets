@@ -1,5 +1,5 @@
-#define CATCH_CONFIG_MAIN
-#include "../include/catch.hpp"
+#include <catch2/catch_test_macros.hpp>
+
 
 TEST_CASE( "Initialization Pitfalls" ) {
     static auto count = 0u;
@@ -7,6 +7,7 @@ TEST_CASE( "Initialization Pitfalls" ) {
     struct TestStruct {
         int value;
 
+        // structs can also have a constructor
         TestStruct() {
             value = 42;
             ++count;
@@ -22,6 +23,24 @@ TEST_CASE( "Initialization Pitfalls" ) {
     REQUIRE( s2.value == 42 );
 
     TestStruct s3();  // beware: this actually declares a function 's3', and does not allocate an object
+    REQUIRE( count == 2);  // no constructor is called due to the bug above
+}
 
-    REQUIRE(2, count);  // no constructor is called due to the bug above
+TEST_CASE( "Aggregate Initialization" ) {
+    // must not have a constructor
+    struct TestStruct {
+        int a;
+        char b = 'b';
+        bool c;
+    };
+
+    // C++20: aggregate initialization ("builder" style)
+    TestStruct s3 {
+        .a = 10,
+        .c = true  // field 'b' gets the default value
+    };
+
+    REQUIRE( s3.a == 10 );
+    REQUIRE( s3.b == 'b' );
+    REQUIRE( s3.c );
 }
