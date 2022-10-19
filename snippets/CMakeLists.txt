@@ -44,7 +44,7 @@ set(SOURCES
         strings/string_conversion.cpp
         strings/string_view.cpp
         strings/stringstream.cpp
-        object_oriented/classes_inheritance.cpp object_oriented/friends.cpp object_oriented/operator_overloading.cpp object_oriented/classes.cpp)
+        object_oriented/classes_inheritance.cpp object_oriented/friends.cpp object_oriented/operator_overloading.cpp object_oriented/classes.cpp pointers/function_pointers.cpp)
 
 add_executable(all-tests ${SOURCES})
 target_link_libraries(all-tests PRIVATE Catch2::Catch2WithMain)

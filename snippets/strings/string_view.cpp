@@ -28,3 +28,8 @@ TEST_CASE( "Tokenize" ) {
 
     REQUIRE( result == expected_tokens );
 }
+
+// do NOT use string_view for temporary objects, e.g.
+// string s {"test"};
+// string_view sw { s + " app" };
+// cout << sw;  // undefined behavior

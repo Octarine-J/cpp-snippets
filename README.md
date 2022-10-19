@@ -5,30 +5,8 @@ tasks such as generating random numbers or working with dates.
 The repository also serves as a quick reminder for one who has not been working
 with C++ for a while.
 
-The most important directory (for now) is `shorts`. The most convenient way to work
-with it is to use Visual Studio Code. Each mini-app or a test case there 
-can easily be run with the "Code Runner" plugin with the following configuration.
-
-On Windows, using VC++:
-```
-"code-runner.executorMap": {
-  "cpp": "\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat\" && cd $dir && cl $fileName /std:c++20 /nologo /EHsc /W4 /Fe:$fileNameWithoutExt.exe && $dir$fileNameWithoutExt.exe && DEL $dir$fileNameWithoutExt.exe && DEL $dir$fileNameWithoutExt.obj"
-}
-```
-
-On Windows, using mingw:
-```
-"code-runner.executorMap": {
-  "cpp": "g++ -std=c++20 $fullFileName -o $fileNameWithoutExt && $fileNameWithoutExt.exe && DEL $fileNameWithoutExt.exe"
-}
-```
-
-On Linux, using GCC:
-```
-"code-runner.executorMap": {
-  "cpp": "g++ -lstdc++ --std=c++17 $fullFileName && ./a.out && rm ./a.out"
-}
-```
+The most important directory is `snippets`.
+This is a CMake project and can be opened as such in Microsoft Visual Studio or JetBrains CLion.
 
 # Learning Resources
 
@@ -111,4 +89,29 @@ ldd my_app
 git submodule add https://github.com/google/googletest.git
 git submodule init
 git submodule update
+```
+
+## How to Configure Code Runner Plugin for VS Code
+A single-file app or a test case can easily be run in VS Code with the "Code Runner" plugin.
+The plugin needs the executor map to be configured for C++, as follows.
+
+On Windows, using VC++ compiler:
+```
+"code-runner.executorMap": {
+  "cpp": "\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat\" && cd $dir && cl $fileName /std:c++20 /nologo /EHsc /W4 /Fe:$fileNameWithoutExt.exe && $dir$fileNameWithoutExt.exe && DEL $dir$fileNameWithoutExt.exe && DEL $dir$fileNameWithoutExt.obj"
+}
+```
+
+On Windows, using mingw:
+```
+"code-runner.executorMap": {
+  "cpp": "g++ -std=c++20 $fullFileName -o $fileNameWithoutExt && $fileNameWithoutExt.exe && DEL $fileNameWithoutExt.exe"
+}
+```
+
+On Linux, using GCC:
+```
+"code-runner.executorMap": {
+  "cpp": "g++ -lstdc++ --std=c++17 $fullFileName && ./a.out && rm ./a.out"
+}
 ```
