@@ -7,7 +7,6 @@ class Foo {
 public:
     explicit Foo(int value) : m_value(value) {}
 
-    [[nodiscard]]
     int get_value() const {
         return m_value;
     }

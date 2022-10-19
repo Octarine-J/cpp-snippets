@@ -1,5 +1,6 @@
-#include <iostream>
 #include <string>
+
+#include <catch2/catch_test_macros.hpp>
 
 class Box {
     int m_value;
@@ -36,12 +37,12 @@ public:
     }
 
     // conversion operator (to string)
-    operator std::string() {
+    operator std::string() const {
         return std::to_string(m_value);
     }
 
     // can use Box as a function object (functor)
-    bool operator()(int value) {
+    bool operator()(int value) const {
         return m_value == value;
     }
 };
@@ -53,27 +54,29 @@ std::ostream& operator<<(std::ostream& stream, const Box& box) {
 // must be declared outside the class to allow commutativity (both: value + box and box + value)
 Box operator+(const Box& first, const Box& second) {
     // can be implemented in terms of += to avoid code duplication
-    return first.m_value + second.m_value;
+    return { first.m_value + second.m_value };
 }
 
 bool operator==(const Box& first, const Box& second) {
     return first.m_value == second.m_value;
 }
 
-int main() {
+TEST_CASE( "Operator Overloading" ) {
     Box x {42};
     x += 10;  // implicit call of Box(int value)
 
-    std::cout << x << std::endl;
+    REQUIRE( x == 52 );
 
     Box y = -x + 100;
-    std::cout << y << std::endl;
+    REQUIRE( y == 48 );
 
     Box z {52};
-    std::cout << (x == z) << std::endl;
+    REQUIRE( x == z );
 
     Box w {100};
-    std::cout << w(100) << std::endl;
+    REQUIRE( w(100) );  // as functor, returns true if the value matches
+    REQUIRE( not w(99) );
 
     std::string s = w;  // using conversion operator
+    REQUIRE( s == "100" );
 }
