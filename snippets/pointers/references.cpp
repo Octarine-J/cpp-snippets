@@ -1,5 +1,22 @@
 #include <iostream>
-#include <string>
+
+#include <catch2/catch_test_macros.hpp>
+
+
+TEST_CASE( "References" ) {
+    // references can replace pointers in many use cases
+    // unlike pointers, references cannot be null
+
+    int i = 17;
+    int &r = i;  // reference is another name for an object
+
+    r = 19;  // changes to a reference affect the bound object
+
+    REQUIRE( i == 19 );
+}
+
+
+// rvalue references
 
 void read_message(std::string& message) {
     std::cout << "l-value: " << message << std::endl;
@@ -10,7 +27,7 @@ void read_message(std::string&& message) {
     // note: message itself is a lvalue, because it has a name!
 }
 
-int main() {
+TEST_CASE( "Rvalue References" ) {
     std::string s1 = "hello ";
     std::string s2 = "world";
 

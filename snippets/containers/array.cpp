@@ -1,6 +1,7 @@
 #include <array>
 #include <cstring>
 #include <iterator>
+#include <memory>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -53,13 +54,11 @@ TEST_CASE( "C-Style Array on Stack" ) {
 
 TEST_CASE( "C-Style Free Store Buffer" ) {
     constexpr auto MSG_SIZE = 24;
-    char *msg = new char[MSG_SIZE];
+    std::unique_ptr<char[]> msg = std::make_unique<char[]>(MSG_SIZE);
 
     // clearing the contents
-    std::memset(msg, 0, MSG_SIZE);
+    std::memset(msg.get(), 0, MSG_SIZE);
     REQUIRE( msg[12] == 0);
-
-    delete[] msg;
 }
 
 TEST_CASE( "Structured Bindings for Arrays (C++17)" ) {
