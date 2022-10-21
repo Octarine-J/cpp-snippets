@@ -1,11 +1,9 @@
-#include <memory>
+#include <catch2/catch_test_macros.hpp>
 
-#define CATCH_CONFIG_MAIN
-#include "../../include/catch.hpp"
 
-TEST_CASE( "Make Unique Ponter" ) {
+TEST_CASE( "Make Unique Pointer" ) {
+    // a unique pointer to int, cannot be copied
     auto i_ptr = std::make_unique<int>(5);
-
     REQUIRE( *i_ptr == 5 );
 
     // pass a smart pointer to a function expecting a raw pointer
@@ -16,29 +14,30 @@ TEST_CASE( "Make Unique Ponter" ) {
     REQUIRE( f(i_ptr.get()) == 6 );
 }
 
-TEST_CASE( "Move Unique Ponter" ) {
+TEST_CASE( "Move Unique Pointer" ) {
     std::unique_ptr<int> i_ptr = std::make_unique<int>(5);
     std::unique_ptr<int> j_ptr = std::move(i_ptr);  // can only move; do not use i_ptr after this
 
     REQUIRE( *j_ptr == 5 );
 }
 
-TEST_CASE( "Smart Pointers with Custom Deleters" ) {
-    auto malloc_int = [](int value) -> int* {
-        int* ptr = (int*) malloc(sizeof(int));
-        *ptr = value;
-        return ptr;
+TEST_CASE( "Make Shared Pointer" ) {
+    // a shared pointer to string
+    auto ps = std::make_shared<std::string>("test");
+
+    // passing a smart pointer to a function and returning it
+    size_t x;
+    auto get_len = [](std::shared_ptr<std::string> s, size_t& x) -> decltype(s) {
+        x = s->length();  // dereferencing a smart pointer
+        return s;
     };
 
-    // unique_ptr requires a template argument
-    std::unique_ptr<int, decltype(free)*> i_ptr(malloc_int(5), free);
+    REQUIRE( get_len(ps, x) == ps );
+    REQUIRE( x == 4 );
 
-    REQUIRE( *i_ptr == 5 );
-
-    // shared_ptr is easier to declare with a custom deleter
-    std::shared_ptr<int> s_ptr(malloc_int(7), free);
-
-    REQUIRE( *s_ptr == 7 );
+    // C++17: can use shared_ptr with arrays
+    std::shared_ptr<int[]> arr(new int[10] {});
+    REQUIRE( arr[9] == 0 );
 }
 
 TEST_CASE( "Shared Pointer Aliasing" ) {
@@ -51,6 +50,22 @@ TEST_CASE( "Shared Pointer Aliasing" ) {
     std::shared_ptr<int> ptr2(ptr1, &ptr1->data); // ptr1 is not destroyed until ptr2 is destroyed
 
     REQUIRE( *ptr2 == 32 );
+}
+
+TEST_CASE( "Smart Pointers with Custom Deleters" ) {
+    auto malloc_int = [](int value) -> int* {
+        int* ptr = (int*) malloc(sizeof(int));
+        *ptr = value;
+        return ptr;
+    };
+
+    // unique_ptr requires a template argument
+    std::unique_ptr<int, decltype(free)*> i_ptr(malloc_int(5), free);
+    REQUIRE( *i_ptr == 5 );
+
+    // shared_ptr is easier to declare with a custom deleter
+    std::shared_ptr<int> s_ptr(malloc_int(7), free);
+    REQUIRE( *s_ptr == 7 );
 }
 
 TEST_CASE( "Weak Pointer" ) {

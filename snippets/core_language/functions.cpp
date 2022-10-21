@@ -2,18 +2,19 @@
 #include <string>
 #include <vector>
 
+#include <catch2/catch_test_macros.hpp>
+
+
 // It is recommended to always use 'references to const'
 // when a function does not change its arguments.
 bool contains_space(const std::string &s) {
     // __func__ returns current function name
     std::cout << "Executing function '" << __func__ << "'...\n";
 
-    for (const auto &c : s) {
-        if (c == ' ') {
-            return true;
-        }
-    }
-    return false;
+    return std::ranges::any_of(s.begin(), s.end(),
+                               [](char c) -> bool {
+                                   return c == ' ';
+                               });
 }
 
 // return an object initialized from an initializer list
@@ -21,8 +22,8 @@ std::vector<std::string> init_list_example() {
     return {"hello", "world", "!"};
 }
 
-// returns lvalue (see in 'main')
-std::string &f_ref(std::string &s) {
+// returns lvalue (see in the test)
+std::string& f_ref(std::string &s) {
     return s;
 }
 
@@ -31,9 +32,14 @@ auto my_square(int x) -> int {
     return x * x;
 }
 
-// a constexpr function
+// a constexpr function, may be evaluated at compile time
 constexpr int cf() {
     return 42;
+}
+
+// C++20: a consteval function, MUST be evaluated at compile time
+consteval int cg() {
+    return cf() * 42;
 }
 
 // functions cannot have array parameters, but they can have
@@ -49,24 +55,27 @@ void print_array(const char (&arr)[4]) {
 template <typename T, size_t N>
 constexpr size_t array_size(T (&)[N]) noexcept {
     return N;
-} 
+}
 
-int main() {
-    std::cout << contains_space("hello world") << std::endl;
-    std::cout << init_list_example()[0] << std::endl;
+TEST_CASE( "Functions" ) {
+    REQUIRE( contains_space("hello world") );
+
+    REQUIRE( init_list_example()[0] == "hello" );
+
     std::string s;
-    f_ref(s) = "hi!"; // can assign to a function result if it is an lvalue
-    std::cout << s << std::endl;
+    f_ref(s) = "hi!"; // can assign to a function result if it is a lvalue
+    REQUIRE( s == "hi!" );
 
-    std::cout << "my_square = " << my_square(7) << std::endl;
+    REQUIRE( my_square(7) == 49 );
 
     constexpr int my_const = cf();
-    std::cout << my_const << std::endl;
+    REQUIRE( my_const == 42 );
+
+    constexpr int my_const2 = cg();
+    REQUIRE( my_const2 == 1764 );
 
     const char str[] = "abc";  // const char[4]
-    print_array(str);          // cannot call this function if the string above is longer or shorter
+    print_array(str);  // cannot call this function if the string above is longer or shorter
 
-    std::cout << "Array Size: " << array_size(str) << std::endl;
-
-    return 0;
+    REQUIRE( array_size(str) == 4 );
 }
