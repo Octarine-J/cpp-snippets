@@ -1,6 +1,8 @@
 #include <cstdlib>
 #include <iostream>
 
+#include <catch2/catch_test_macros.hpp>
+
 // function never returns
 [[noreturn]] void exit_app() {
     std::exit(1);
@@ -30,6 +32,6 @@ int get_param(int p1, [[maybe_unused]] int p2) {
     return p1;
 }
 
-int main() {
+TEST_CASE( "Deprecation" ) {
     foo(1);  // generates a complier warning
 }

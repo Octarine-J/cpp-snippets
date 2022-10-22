@@ -1,7 +1,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 
-TEST_CASE( "Initialization Pitfalls" ) {
+TEST_CASE( "Struct Initialization Pitfalls" ) {
     static auto count = 0u;
 
     struct TestStruct {
@@ -43,4 +43,19 @@ TEST_CASE( "Aggregate Initialization" ) {
     REQUIRE( s3.a == 10 );
     REQUIRE( s3.b == 'b' );
     REQUIRE( s3.c );
+}
+
+TEST_CASE( "Structured Bindings for Structs" ) {
+    struct Employee {
+        std::string name;
+        int age;
+    };
+
+    Employee employee { "Helga", 33 };
+
+    // structured binding
+    auto [name, age] = employee;
+
+    REQUIRE( name == "Helga" );
+    REQUIRE( age == 33 );
 }

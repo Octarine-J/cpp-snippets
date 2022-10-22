@@ -30,4 +30,12 @@ TEST_CASE( "For Loop" ) {
     for (auto value : {10, 11, 13, 16, 20}) {
         REQUIRE( value <= 20 );
     }
+
+    // use a reference to modify each item in a list
+    int a[] = {1, 2, 3};
+    for (auto& value : a) {
+        ++value;
+    }
+
+    REQUIRE( (a[0] == 2 and a[1] == 3 and a[2] == 4) );
 }

@@ -22,10 +22,26 @@ TEST_CASE( "Move Unique Pointer" ) {
 }
 
 TEST_CASE( "Make Shared Pointer" ) {
-    // a shared pointer to string
+    // a shared pointer
+    auto ptr1 = std::make_shared<int>(42);
+    auto ptr2 { ptr1 };  // a correct way to have additional pointer
+
+    *ptr2 = 7;
+
+    REQUIRE( (*ptr1 == 7 and *ptr2 == 7) );
+    REQUIRE( ptr1.use_count() == 2 );  // how many owners
+
+    // C++17: can use shared_ptr with arrays
+    std::shared_ptr<int[]> arr(new int[10] {});
+    REQUIRE( arr[9] == 0 );
+}
+
+TEST_CASE( "Passing Shared Pointer to Function" ) {
     auto ps = std::make_shared<std::string>("test");
 
-    // passing a smart pointer to a function and returning it
+    // passing a smart pointer to a function and returning it.
+    // only pass a shared_ptr to a function is ownership is involved;
+    // otherwise simply use a const T*
     size_t x;
     auto get_len = [](std::shared_ptr<std::string> s, size_t& x) -> decltype(s) {
         x = s->length();  // dereferencing a smart pointer
@@ -34,10 +50,6 @@ TEST_CASE( "Make Shared Pointer" ) {
 
     REQUIRE( get_len(ps, x) == ps );
     REQUIRE( x == 4 );
-
-    // C++17: can use shared_ptr with arrays
-    std::shared_ptr<int[]> arr(new int[10] {});
-    REQUIRE( arr[9] == 0 );
 }
 
 TEST_CASE( "Shared Pointer Aliasing" ) {

@@ -17,6 +17,14 @@ TEST_CASE( "Pointers" ) {
     REQUIRE( *static_cast<int*>(pv) == 20 );
 }
 
+TEST_CASE( "Delete Pointer" ) {
+    // can safely delete a nullptr pointer
+    int* ptr = nullptr;
+    delete ptr;
+
+    REQUIRE( ptr == nullptr );
+}
+
 TEST_CASE( "Modify Pointer Passed to Function" ) {
     int* ptr = nullptr;
 
