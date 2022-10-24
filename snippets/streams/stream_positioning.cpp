@@ -1,8 +1,7 @@
 #include <string>
 #include <sstream>
 
-#define CATCH_CONFIG_MAIN
-#include "../../include/catch.hpp"
+#include <catch2/catch_test_macros.hpp>
 
 // Streams can be navigated using seekg (seek get, for input steams)
 // and seekp (seek put, for output streams).

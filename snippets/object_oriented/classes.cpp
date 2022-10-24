@@ -11,9 +11,18 @@ private:
     int* value = nullptr;  // can init values in place
     mutable size_t value_accessed_times = 0;  // can change mutable variables in const methods
 
+    // need to allocate space for static variables in this file separately
+    static size_t count;
+
+    // C++17: can use inline to avoid extra allocation line
+    static inline size_t improved_count = 0;
+
     Cell() = default;
 public:
-    explicit Cell(int val) : value(new int(val)) {}
+    explicit Cell(int val) : value(new int(val)) {
+        ++count;
+        ++improved_count;
+    }
 
     // delegating constructor: can just call another constructor,
     // cannot have other initializers (e.g., for other fields)
@@ -70,6 +79,9 @@ public:
         delete value;
     }
 };
+
+// allocating space for static variable
+size_t Cell::count = 0;
 
 bool operator==(const Cell& right, const Cell& left) {
     return *(right.value) == *(left.value);

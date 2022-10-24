@@ -1,8 +1,7 @@
 #include <string>
 #include <strstream>
 
-#define CATCH_CONFIG_MAIN
-#include "../../include/catch.hpp"
+#include <catch2/catch_test_macros.hpp>
 
 
 // Bidirectional streams allow both reading and writing operations.
@@ -20,7 +19,7 @@ TEST_CASE( "Read and Write to a Bidirectional Stream" ) {
         ss >> id;
 
         if (id == target_id) {
-            // IMPORTANT: seek the write position to the current read position
+            // IMPORTANT: seek the writing position to the current read position
             ss.seekp(ss.tellg());
             // overwrite the data
             ss << " " << "05-5555-5555";
@@ -36,4 +35,4 @@ TEST_CASE( "Read and Write to a Bidirectional Stream" ) {
 // Two streams can be tied with stream.tie(&otherStream) method.
 // When input or output occurs to the first stream, the other stream
 // is automatically flushed.
-// By default cin/cout and cerr/cout are tied.
+// By default, cin/cout and cerr/cout are tied.
