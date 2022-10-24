@@ -53,5 +53,9 @@ TEST_CASE( "Class Hierarchy" ) {
 
     // typeid operator (a class must have vtable)
     REQUIRE( typeid(animal) == typeid(Cat) );
-    REQUIRE( typeid(animal).name() == std::string("class Cat") );
+
+    // printable class name, differs between compilers
+    // g++: 3Cat, MSVC: class Cat
+    std::string printable_name = std::string(typeid(animal).name());
+    REQUIRE( printable_name.find("Cat") != std::string::npos );
 }

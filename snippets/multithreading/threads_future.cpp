@@ -9,7 +9,7 @@
 int add_all(std::vector<int>::const_iterator begin,
             std::vector<int>::const_iterator end,
             int init_value) {
-    return std::accumulate(std::move(begin), std::move(end), init_value);
+    return std::accumulate(begin, end, init_value);
 }
 
 TEST_CASE( "Packaged Task and Future" ) {
