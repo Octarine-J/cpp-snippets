@@ -1,5 +1,5 @@
 #include <string>
-#include <strstream>
+#include <sstream>
 
 #include <catch2/catch_test_macros.hpp>
 
