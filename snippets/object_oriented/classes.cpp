@@ -92,7 +92,7 @@ void swap(Cell& lhs, Cell& rhs) noexcept {
     std::swap(rhs.value_accessed_times, lhs.value_accessed_times);
 }
 
-class CellUtils {
+class CellUtils final {
 public:
     CellUtils() = delete;  // do not create the default constructor
     CellUtils(const CellUtils& other) = delete;  // no copy constructor

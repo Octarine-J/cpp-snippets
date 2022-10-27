@@ -19,6 +19,10 @@ TEST_CASE( "String to Int" ) {
     size_t pos = -1;
     REQUIRE( std::stoi("12eur", &pos) == 12 );
     REQUIRE( pos == 2 );  // position of the first not converted character
+
+    // if pos is provided, but there were no failures, pos points past last char:
+    REQUIRE( std::stoi("12345", &pos) == 12345 );
+    REQUIRE( pos == 5 );
 }
 
 TEST_CASE( "String to Unsigned Long Long" ) {

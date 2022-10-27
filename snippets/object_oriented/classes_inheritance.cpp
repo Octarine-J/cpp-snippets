@@ -22,7 +22,7 @@ public:
     }
 };
 
-class Cat final : public Animal {
+class Cat : public Animal {
 public:
     std::string greet() const override {
         return "meow!";
@@ -41,6 +41,8 @@ public:
     using Animal::sleep;  // it pulls all overloads with the same name at once
 };
 
+class Siberian final : public Cat {};
+
 TEST_CASE( "Class Hierarchy" ) {
     Cat cat;
     cat.sleep();
@@ -58,4 +60,27 @@ TEST_CASE( "Class Hierarchy" ) {
     // g++: 3Cat, MSVC: class Cat
     std::string printable_name = std::string(typeid(animal).name());
     REQUIRE( printable_name.find("Cat") != std::string::npos );
+}
+
+TEST_CASE( "Dynamic Cast" ) {
+    Siberian siberian;
+    Cat* p_cat = &siberian;
+
+    // having a pointer to Cat, we want to restore a pointer to Siberian
+    // NOTE: class must have at least 1 virtual method for dynamic_cast to work
+    Siberian* p_siberian = dynamic_cast<Siberian*>(p_cat);
+    REQUIRE( p_siberian == &siberian );
+}
+
+TEST_CASE( "Dynamic Cast Failure" ) {
+    Cat cat;
+    Cat* p_cat = &cat;
+
+    // cast down the hierarchy, but p_cat points to Cat, not Siberian
+    Siberian* p_siberian = dynamic_cast<Siberian*>(p_cat);
+    REQUIRE( p_siberian == nullptr );  // cast fails, Cat is not Siberian
+
+    // in case of a reference
+    Cat& r_cat = cat;
+    REQUIRE_THROWS_AS( dynamic_cast<Siberian&>(r_cat), std::bad_cast );
 }
