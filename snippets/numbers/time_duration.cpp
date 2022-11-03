@@ -1,8 +1,7 @@
 #include <chrono>
 using namespace std::chrono;
 
-#define CATCH_CONFIG_MAIN
-#include "../include/catch.hpp"
+#include <catch2/catch_test_macros.hpp>
 
 
 TEST_CASE( "Add duration" ) {

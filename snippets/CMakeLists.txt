@@ -34,17 +34,43 @@ set(SOURCES
         numbers/arithmetic.cpp
         object_oriented/structs.cpp
         strings/regex.cpp
-        std_algorithms/generate.cpp
-        std_algorithms/search.cpp
-        std_algorithms/mapping.cpp
-        std_algorithms/reduce.cpp
+        functional/generate.cpp
+        functional/search.cpp
+        functional/mapping.cpp
+        functional/reduce.cpp
         strings/c_string.cpp
         strings/char.cpp
         strings/string.cpp
         strings/string_conversion.cpp
         strings/string_view.cpp
         strings/stringstream.cpp
-        object_oriented/classes_inheritance.cpp object_oriented/friends.cpp object_oriented/operator_overloading.cpp object_oriented/classes.cpp pointers/function_pointers.cpp pointers/pointers.cpp pointers/references.cpp pointers/smart_pointers.cpp core_language/control_statements.cpp core_language/functions.cpp object_oriented/enums.cpp core_language/attributes.cpp core_language/namespaces.cpp core_language/assert.cpp streams/bidirectional_stream.cpp streams/stream_positioning.cpp object_oriented/classes_ref_methods.cpp core_language/cast.cpp streams/stream_types.cpp streams/cin.cpp)
+        object_oriented/classes_inheritance.cpp
+        object_oriented/friends.cpp
+        object_oriented/operator_overloading.cpp
+        object_oriented/classes.cpp
+        pointers/function_pointers.cpp
+        pointers/pointers.cpp
+        pointers/references.cpp
+        pointers/smart_pointers.cpp
+        core_language/control_statements.cpp
+        functional/functions.cpp
+        object_oriented/enums.cpp
+        core_language/attributes.cpp
+        core_language/namespaces.cpp
+        core_language/assert.cpp
+        streams/bidirectional_stream.cpp
+        streams/stream_positioning.cpp
+        object_oriented/classes_ref_methods.cpp
+        core_language/cast.cpp
+        streams/streams.cpp
+        streams/input_stream.cpp
+        streams/stream_modifiers.cpp
+        streams/stream_low_level.cpp
+        templates/concepts.cpp
+        numbers/time_duration.cpp
+        functional/lambda.cpp
+        functional/functor.cpp
+        templates/templates.cpp)
 
 add_executable(all-tests ${SOURCES})
 target_link_libraries(all-tests PRIVATE Catch2::Catch2WithMain)

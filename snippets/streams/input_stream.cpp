@@ -6,7 +6,7 @@
 int read_and_sum_numbers(std::istream& is) {
     std::cout << "Input numbers to add (CTRL+Z on Windows / CTRL+D on UNIX to stop.)\n";
 
-    if (!is.good()) {
+    if (!is.good()) {  // = not bad && not eof
         std::cerr << "Error: cin is in a bad state.\n";
         return 0;
     }
@@ -14,14 +14,14 @@ int read_and_sum_numbers(std::istream& is) {
     int sum = 0;
     int number;
 
-    while (!is.bad()) {
+    while (!is.bad()) {  // note that eof is not bad
         is >> number;
 
         if (is.eof()) {
             break;
         }
 
-        if (is.fail()) {
+        if (is.fail()) {  // last operation failed
             is.clear();  // reset error state
 
             std::string bad_token;

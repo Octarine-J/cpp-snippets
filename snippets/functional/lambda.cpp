@@ -1,10 +1,9 @@
 #include <functional>
-#include <iostream>
 #include <sstream>
+#include <stdlib.h>
 #include <vector>
 
-#define CATCH_CONFIG_MAIN
-#include "../include/catch.hpp"
+#include "catch2/catch_test_macros.hpp"
 
 void for_each(std::vector<int>& v, const std::function<void(int&)>& f) {
     for (auto& item : v) {
@@ -12,7 +11,17 @@ void for_each(std::vector<int>& v, const std::function<void(int&)>& f) {
     }
 }
 
+bool find(const std::vector<int>& v, const std::function<bool(int)>& pred) {
+    for (int x : v) {
+        if (pred(x)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 TEST_CASE( "Lambda without Parameters" ) {
+    // often used for initialization
     auto f = []{
         return std::string("hello, world");
     };
@@ -20,15 +29,30 @@ TEST_CASE( "Lambda without Parameters" ) {
     REQUIRE( f() == "hello, world" );
 }
 
-TEST_CASE( "Closure" ) {
+TEST_CASE( "Closure (capture by reference)" ) {
     int sum = 0;
     std::vector<int> v = {1, 2, 3};
 
+    // use [&] to capture everything by reference
+    // use [this] to capture this by reference
     for_each(v, [&sum](int value) {
         sum += value;
     });
 
     REQUIRE( sum == 6 );
+}
+
+TEST_CASE( "Closure (capture by value)" ) {
+    int target = 3;
+    std::vector<int> v = {1, 2, 3};
+
+    // use [=] to capture everything by value
+    // use [*this] to capture this by value
+    bool exists = find(v, [target](int value)  {
+        return value == target;
+    });
+
+    REQUIRE( exists );
 }
 
 TEST_CASE( "Modifying a Vector by Lambda" ) {
