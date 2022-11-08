@@ -9,9 +9,11 @@ struct instrumented_base
         n_, copy, default_constructor, destructor, assignment, equality, comparison
     };
 
-    static const size_t number_ops = 7;
+    static constexpr size_t number_ops = 7;
     static double counts[number_ops];
-    static const char* counter_names[number_ops];
+    static constexpr char const* counter_names[] {
+            "n", "copy", "default", "destruct", "assign", "equal", "less"
+    };
 
     static void initialize(size_t);
 };
@@ -22,9 +24,7 @@ struct instrumented : instrumented_base
     typedef T value_type;
     T value;
 
-    explicit instrumented(const T& x) : value(x) {}
-    
-    // semiregular
+    instrumented(const T& x) : value(x) {}
     
     instrumented(const instrumented& x) : value(x.value) {
         ++counts[copy];
@@ -43,8 +43,6 @@ struct instrumented : instrumented_base
         value = x.value;
         return *this;
     }
-
-    // regular
     
     friend bool operator==(const instrumented& x, const instrumented& y) {
         ++counts[equality];
@@ -55,8 +53,6 @@ struct instrumented : instrumented_base
         return !(x == y);
     }
 
-    // totally ordered
- 
     friend bool operator<(const instrumented& x, const instrumented& y) {
         ++counts[comparison];
         return x.value < y.value;

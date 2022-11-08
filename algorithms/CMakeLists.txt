@@ -30,7 +30,10 @@ set(SOURCES
         optimization/knapsack_test.cpp
         search/binary_search_test.cpp
         sorting/sorting_test.cpp
-#       ...
+        theory/count_operations.hpp
+        theory/instrumented.cpp
+        theory/instrumented_test.cpp
+        #       ...
 )
 
 add_executable(all-tests ${SOURCES})

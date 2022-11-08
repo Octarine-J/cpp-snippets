@@ -1,6 +1,7 @@
 #ifndef ALGORITHMS_IN_CPP_LIST_POOL_HPP
 #define ALGORITHMS_IN_CPP_LIST_POOL_HPP
 
+#include <cstddef>
 #include <vector>
 
 /**
