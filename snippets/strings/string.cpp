@@ -30,8 +30,10 @@ TEST_CASE( "String Modification" ) {
 TEST_CASE( "Substring" ) {
     std::string s = "hello, world";
 
+    // substr(pos, len)
     REQUIRE( s.substr(0, 1) == "h" );
     REQUIRE( s.substr(0, 5) == "hello" );
+    REQUIRE( s.substr(1, 2) == "el" );
     REQUIRE( s == "hello, world" );
 }
 

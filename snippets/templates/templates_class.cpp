@@ -1,13 +1,15 @@
-#include <iostream>
+#include <cmath>
 #include <string>
 #include <vector>
+
+#include <catch2/catch_test_macros.hpp>
 
 template <typename T = int>  // can provide default type
 class Box {
 private:
-    const T value;
+    T value;
 public:
-    Box(T _value) : value{_value} {}
+    Box(const T& _value) : value{_value} {}
 
     const T& get_value() const;
 
@@ -16,7 +18,7 @@ public:
 
     // copy constructor from a box parameterized by another type
     template <typename E>
-    Box(const Box<E>& other); 
+    Box(const Box<E>& other);
 };
 
 template <typename T>
@@ -34,17 +36,23 @@ Box<T>::Box(const Box<E>& other) {
 Box(const char*) -> Box<std::string>;
 
 
-int main() {
+TEST_CASE( "Class Templates" ) {
+    const double eps = 1e-7;
+
     Box<std::string> box1 {"test"};
-    std::cout << box1.get_value() << std::endl;
+    REQUIRE( box1.get_value() == "test" );
 
     Box<double> box2 {3.14};
-    std::cout << box2.get_value() << std::endl;
+    REQUIRE( fabs(box2.get_value() - 3.14) < eps );
 
     Box<std::vector<int>> box3 {{1, 2, 3}};
 
     Box<> box4 {42};  // using default type
+    REQUIRE( box4.get_value() == 42 );
+
     Box box5 {2.71};  // C++17: compiler can deduce the type from constructor arguments
+    REQUIRE( fabs(box5.get_value() - 2.71) < eps );
 
     Box<int> box6(Box<double>(2.17));  // using templated copy constructor
+    REQUIRE( box6.get_value() == 2 );
 }

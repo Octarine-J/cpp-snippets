@@ -41,7 +41,7 @@ struct singleton {
 
     // Totally Ordered Type (7-10):
  
-    // 7. less then
+    // 7. less than
     // all other comparisons are defined by using this operator
     friend bool operator<(const singleton& x, const singleton& y) {
         return x.value < y.value;
@@ -64,11 +64,12 @@ struct singleton {
 
     // Conversions from T and to T
     
-    typedef T value_type;
+    typedef T value_type;  // type of element in singleton, for compile time and runtime reference
 
     // constructor
     explicit singleton(const T& x) : value(x) {}
 
+    // convert from singleton back to T
     explicit operator T() const {
         return value;
     }

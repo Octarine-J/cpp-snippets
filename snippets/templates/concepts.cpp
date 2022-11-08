@@ -5,6 +5,8 @@
 // concepts are constrained template types
 template<std::copyable T>  // using a predefined concept from the standard library
 T foo(T& value) {
+    // can overload foo for different concepts
+    // the compiler will choose the overloaded function that better matches the requirements
     T a {value};
     return a;
 }
@@ -16,9 +18,9 @@ public:
 };
 
 TEST_CASE( "Constrained Template Instantiation" ) {
-    int x;
+    int x = 7;
     REQUIRE( foo(x) == x );  // OK
 
     NonCopyable y;
-    //REQUIRE( foo(y) == y );  // does not compile, y is not copyable
+    //foo(y);  // does not compile, y is not copyable
 }

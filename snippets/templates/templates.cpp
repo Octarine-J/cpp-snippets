@@ -1,5 +1,4 @@
 #include <map>
-#include <sstream>
 #include <string>
 #include <vector>
 
@@ -11,19 +10,6 @@ decltype(auto) sum(std::vector<T> v, T acc = {}) {  // automatically deduce retu
         acc = acc + e;
     }
     return acc;
-}
-
-// variadic template (base case, must be declared first)
-template <typename T>
-void print_all(std::ostream& os, T value) {
-    os << value;
-}
-
-// variadic template (list of values of different types)
-template <typename T, typename... Rest>
-void print_all(std::ostream& os, T head, Rest... tail) {  // function must have the same name
-    os << head << " ";
-    print_all(os, tail...);  // recursive call
 }
 
 // C++14: variable template
@@ -43,10 +29,6 @@ TEST_CASE( "Templates" ) {
 
     std::vector<std::string> c {"Hello", ", ", "world", "!"};
     REQUIRE( sum(c) == "Hello, world!" );
-
-    std::stringstream ss;
-    print_all(ss, 3.0, 22, "bread", true);
-    REQUIRE( ss.str() == "3 22 bread 1" );
 
     float floatPi = pi<float>;
     double doublePi = pi<double>;
