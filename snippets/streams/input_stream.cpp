@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -54,4 +55,15 @@ TEST_CASE( "Input Stream With Bad Tokens" ) {
 
     int result = read_and_sum_numbers(is);
     REQUIRE( result == 102 );
+}
+
+TEST_CASE( "Read From Input Stream Line by Line" ) {
+    std::istringstream is {"4 12 7\nEric Schmidt\n"};
+
+    std::string line;
+    std::getline(is, line);
+    REQUIRE( line == "4 12 7" );
+
+    std::getline(is, line);
+    REQUIRE( line == "Eric Schmidt" );
 }

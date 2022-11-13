@@ -70,7 +70,7 @@ set(SOURCES
         numbers/time_duration.cpp
         functional/lambda.cpp
         functional/functor.cpp
-        templates/templates.cpp templates/if_constexpr.cpp templates/concepts_custom.cpp templates/templates_class.cpp templates/templates_variadic.cpp)
+        templates/templates.cpp templates/if_constexpr.cpp templates/concepts_custom.cpp templates/templates_class.cpp templates/templates_variadic.cpp streams/file_stream.cpp system/files.cpp)
 
 add_executable(all-tests ${SOURCES})
 target_link_libraries(all-tests PRIVATE Catch2::Catch2WithMain)
