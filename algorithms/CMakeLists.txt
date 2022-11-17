@@ -34,7 +34,7 @@ set(SOURCES
         theory/instrumented.cpp
         theory/instrumented_test.cpp
         #       ...
-)
+        graphs/union_find/quick_find_test.cpp graphs/union_find/quick_find.hpp graphs/union_find/quick_union.hpp graphs/union_find/quick_union_test.cpp graphs/union_find/union_find_base.hpp)
 
 add_executable(all-tests ${SOURCES})
 target_link_libraries(all-tests PRIVATE Catch2::Catch2WithMain)
