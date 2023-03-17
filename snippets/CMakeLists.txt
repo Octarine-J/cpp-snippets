@@ -34,10 +34,10 @@ set(SOURCES
         numbers/arithmetic.cpp
         object_oriented/structs.cpp
         strings/regex.cpp
-        functional/generate.cpp
-        functional/search.cpp
-        functional/mapping.cpp
-        functional/reduce.cpp
+        container_algorithms/generate.cpp
+        container_algorithms/search.cpp
+        container_algorithms/mapping.cpp
+        container_algorithms/reduce.cpp
         strings/c_string.cpp
         strings/char.cpp
         strings/string.cpp
@@ -70,7 +70,7 @@ set(SOURCES
         numbers/time_duration.cpp
         functional/lambda.cpp
         functional/functor.cpp
-        templates/templates.cpp templates/if_constexpr.cpp templates/concepts_custom.cpp templates/templates_class.cpp templates/templates_variadic.cpp streams/file_stream.cpp system/files.cpp)
+        templates/templates.cpp templates/if_constexpr.cpp templates/concepts_custom.cpp templates/templates_class.cpp templates/templates_variadic.cpp streams/file_stream.cpp system/files.cpp container_algorithms/container_algorithms.cpp)
 
 add_executable(all-tests ${SOURCES})
 target_link_libraries(all-tests PRIVATE Catch2::Catch2WithMain)

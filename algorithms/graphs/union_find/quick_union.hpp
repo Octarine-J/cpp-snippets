@@ -46,6 +46,7 @@ namespace union_find {
 
             return {i, height};
         }
+
     public:
         // O(n)
         explicit UF_QuickUnion(size_t n) : id_(n) {

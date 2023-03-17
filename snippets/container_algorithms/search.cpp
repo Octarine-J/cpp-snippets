@@ -51,7 +51,7 @@ TEST_CASE( "Search in a Container using a Member Function" ) {
     // need to use std::mem_fn to pass a member function
     auto result = std::find_if(words.begin(), words.end(), std::mem_fn(&std::string::empty));
 
-    REQUIRE( result == words.cend() );  // no empty strings
+    REQUIRE( result == words.end() );  // no empty strings
 }
 
 TEST_CASE( "Find Any Value from a Set of Values" ) {
