@@ -67,3 +67,16 @@ TEST_CASE( "Read From Input Stream Line by Line" ) {
     std::getline(is, line);
     REQUIRE( line == "Eric Schmidt" );
 }
+
+TEST_CASE( "Optimize Reading Speed for Large Input" ) {
+    // useful for reading big data
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+
+    std::istringstream is {"1 2 3\n"};
+    int a, b;
+    is >> a >> b;
+
+    REQUIRE( a == 1 );
+    REQUIRE( b == 2 );
+}
