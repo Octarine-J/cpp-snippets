@@ -70,8 +70,9 @@ TEST_CASE( "Read From Input Stream Line by Line" ) {
 
 TEST_CASE( "Optimize Reading Speed for Large Input" ) {
     // useful for reading big data
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(nullptr);
+    // TODO: this causes test failures when run from CLion
+//    std::ios::sync_with_stdio(false);
+//    std::cin.tie(nullptr);
 
     std::istringstream is {"1 2 3\n"};
     int a, b;
