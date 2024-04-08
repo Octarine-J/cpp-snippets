@@ -15,19 +15,24 @@ double operator"" _cm(const char *value) {
     return std::stod(value) * 10; // mm
 }
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnusedLocalVariable"
+#pragma ide diagnostic ignored "UnusedValue"
 int main() {
     // every literal has a type
-    int i1 = 20, i2 = 024, i3 = 0x14, i4 = 0b1001011; // decimal, octal, hexadecimal, binary integers
-    int i5 = 1'024'768;                               // can separate digits with '
+    int i1 = 20, i2 = 024, i3 = 0x14;  // decimal, octal, hexadecimal integers
+    int i4 = 0b1001011;                // C++14: binary literals
+    int i5 = 1'024'768;                // can separate digits with '
     unsigned long long i6 = 42ULL;
     float f1 = 1e-3f;
     long double d1 = 3.1415926L;
     long double d2 = 0xa.bcdp-10; // C++17: hex floats
 
     char c1 = '\7', c2 = '\x4e'; // octal and hexadecimal escape sequences
-    wchar_t w1 = L'a';           // wchar_t literal
-    char16_t w2 = u'a';          // utf-16
-    char32_t w3 = U'a';          // utf-32
+    char8_t  w1 = u8'\44';        // C++20: utf-8
+    char16_t w2 = u'\x394';       // utf-16
+    char32_t w3 = U'\u044f';      // utf-32
+    wchar_t  w4 = L'\U000000E7';  // also utf-32
 
     // C++20:  std::u8string, before:  std::string
     // std::u8string is not printable
@@ -55,3 +60,4 @@ int main() {
 
     return 0;
 }
+#pragma clang diagnostic pop

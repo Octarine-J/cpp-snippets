@@ -7,7 +7,7 @@
 
 TEST_CASE( "Empty any" ) {
     std::any x;
-    REQUIRE( not x.has_value() );
+    REQUIRE( ! x.has_value() );
 
     std::any y {"test"};
     REQUIRE( y.has_value() );

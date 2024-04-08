@@ -75,7 +75,7 @@ TEST_CASE( "Operator Overloading" ) {
 
     Box w {100};
     REQUIRE( w(100) );  // as functor, returns true if the value matches
-    REQUIRE( not w(99) );
+    REQUIRE( ! w(99) );
 
     std::string s = w;  // using conversion operator
     REQUIRE( s == "100" );

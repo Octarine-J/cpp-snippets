@@ -25,6 +25,8 @@ set(SOURCES
         data_structures/linked_list_test.cpp
         data_structures/list_pool_test.cpp
         data_structures/matrix_test.cpp
+        graphs/union_find/quick_find_test.cpp
+        graphs/union_find/quick_union_test.cpp
         numeric/minmax_test.cpp
         numeric/sqrt_test.cpp
         optimization/knapsack_test.cpp
@@ -34,7 +36,7 @@ set(SOURCES
         theory/instrumented.cpp
         theory/instrumented_test.cpp
         #       ...
-        graphs/union_find/quick_find_test.cpp graphs/union_find/quick_find.hpp graphs/union_find/quick_union.hpp graphs/union_find/quick_union_test.cpp graphs/union_find/union_find_base.hpp)
+)
 
 add_executable(all-tests ${SOURCES})
 target_link_libraries(all-tests PRIVATE Catch2::Catch2WithMain)

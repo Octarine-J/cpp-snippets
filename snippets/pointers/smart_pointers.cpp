@@ -30,7 +30,7 @@ TEST_CASE( "Make Shared Pointer" ) {
 
     *ptr2 = 7;
 
-    REQUIRE( (*ptr1 == 7 and *ptr2 == 7) );
+    REQUIRE( (*ptr1 == 7 && *ptr2 == 7) );
     REQUIRE( ptr1.use_count() == 2 );  // how many owners
 
     // C++17: can use shared_ptr with arrays

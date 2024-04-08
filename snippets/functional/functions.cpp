@@ -3,19 +3,19 @@
 #include <string>
 #include <vector>
 
-#include "catch2/catch_test_macros.hpp"
+#include <catch2/catch_test_macros.hpp>
 
 
 // It is recommended to always use 'references to const'
 // when a function does not change its arguments.
-bool contains_space(const std::string &s) {
+bool contains_space(const std::string& s) {
     // __func__ returns current function name
     std::cout << "Executing function '" << __func__ << "'...\n";
 
-    return std::ranges::any_of(s.begin(), s.end(),
-                               [](char c) -> bool {
-                                   return c == ' ';
-                               });
+    return std::any_of(s.begin(), s.end(),
+                       [](char c) -> bool {
+                           return c == ' ';
+                       });
 }
 
 // return an object initialized from an initializer list
@@ -36,11 +36,6 @@ auto my_square(int x) -> int {
 // a constexpr function, may be evaluated at compile time
 constexpr int cf() {
     return 42;
-}
-
-// C++20: a consteval function, MUST be evaluated at compile time
-consteval int cg() {
-    return cf() * 42;
 }
 
 // functions cannot have array parameters, but they can have
@@ -71,9 +66,6 @@ TEST_CASE( "Functions" ) {
 
     constexpr int my_const = cf();
     REQUIRE( my_const == 42 );
-
-    constexpr int my_const2 = cg();
-    REQUIRE( my_const2 == 1764 );
 
     const char str[] = "abc";  // const char[4]
     print_array(str);  // cannot call this function if the string above is longer or shorter

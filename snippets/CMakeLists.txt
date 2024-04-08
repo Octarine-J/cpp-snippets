@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.20)
 project(snippets)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
+add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
 include(FetchContent)
 
@@ -73,8 +74,6 @@ set(SOURCES
         streams/stream_modifiers.cpp
         streams/stream_positioning.cpp
         system/files.cpp
-        templates/concepts.cpp
-        templates/concepts_custom.cpp
         templates/if_constexpr.cpp
         templates/templates.cpp
         templates/templates_class.cpp

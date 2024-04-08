@@ -22,6 +22,6 @@ TEST_CASE( "Optional" ) {
     REQUIRE( find(nums, 3).value() == 2 );
     REQUIRE( find(nums, 3).value_or(-1) == 2 );
 
-    REQUIRE( not find(nums, 4).has_value() );
+    REQUIRE( ! find(nums, 4).has_value() );
     REQUIRE( find(nums, 4).value_or(-1) == -1 );
 }

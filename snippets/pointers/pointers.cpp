@@ -48,5 +48,5 @@ TEST_CASE( "Print Pointer" ) {
     ss << (void*)ptr;
 
     std::string address = ss.str();
-    REQUIRE( (address.length() == 16u or address.find("0x") != std::string::npos) );
+    REQUIRE( (address.length() == 16u || address.find("0x") != std::string::npos) );
 }

@@ -26,25 +26,6 @@ TEST_CASE( "Struct Initialization Pitfalls" ) {
     REQUIRE( count == 2);  // no constructor is called due to the bug above
 }
 
-TEST_CASE( "Aggregate Initialization" ) {
-    // must not have a constructor
-    struct TestStruct {
-        int a;
-        char b = 'b';
-        bool c;
-    };
-
-    // C++20: aggregate initialization ("builder" style)
-    TestStruct s3 {
-        .a = 10,
-        .c = true  // field 'b' gets the default value
-    };
-
-    REQUIRE( s3.a == 10 );
-    REQUIRE( s3.b == 'b' );
-    REQUIRE( s3.c );
-}
-
 TEST_CASE( "Structured Bindings for Structs" ) {
     struct Employee {
         std::string name;

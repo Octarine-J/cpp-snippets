@@ -13,7 +13,7 @@ TEST_CASE( "Function Pointers") {
     bool (*p)(const int &, const int &);  // uninitialized
     p = compare_f;
 
-    REQUIRE( not p(3, 4) );
+    REQUIRE( ! p(3, 4) );
 
     Predicate p2 = compare_f;
     REQUIRE( p2(7, 7) );

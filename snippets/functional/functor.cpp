@@ -15,6 +15,6 @@ TEST_CASE( "less_then Functor" ) {
     less_then lt {7};
 
     REQUIRE( lt(6) );
-    REQUIRE( not lt(8) );
+    REQUIRE( ! lt(8) );
 }
 

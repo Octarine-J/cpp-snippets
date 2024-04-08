@@ -1,8 +1,13 @@
 #include <cmath>
-#include <numbers>
 
 #include <catch2/catch_test_macros.hpp>
 
+
+TEST_CASE( "Rounding" ) {
+    REQUIRE( static_cast<int>(std::round(5.5)) == 6 );
+    REQUIRE( static_cast<int>(std::ceil(5.5)) == 6 );
+    REQUIRE( static_cast<int>(std::floor(5.5)) == 5 );
+}
 
 TEST_CASE( "Infinity" ) {
     double x = std::numeric_limits<double>::infinity();
@@ -19,9 +24,10 @@ TEST_CASE( "Not a Number" ) {
     REQUIRE( std::isnan(a / b) );
 }
 
-TEST_CASE( "Predefined Numbers" ) {
-    // from C++20
-    REQUIRE( (std::numbers::pi - 3.1415926 < 1e-7) );
-    REQUIRE( (std::numbers::e - 2.718 < 1e-3) );
-    REQUIRE( (std::numbers::sqrt2 - 1.41 < 1e-2) );
+TEST_CASE( "Float Cannot Hold All Int" ) {
+    int x = 1'000'000'160;
+    float y = x;  // narrowing conversion
+    int z = y;
+
+    REQUIRE( z == 1'000'000'128 );
 }

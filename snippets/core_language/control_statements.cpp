@@ -37,5 +37,5 @@ TEST_CASE( "For Loop" ) {
         ++value;
     }
 
-    REQUIRE( (a[0] == 2 and a[1] == 3 and a[2] == 4) );
+    REQUIRE( (a[0] == 2 && a[1] == 3 && a[2] == 4) );
 }

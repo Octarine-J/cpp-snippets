@@ -13,20 +13,19 @@ TEST_CASE( "Enums" ) {
 }
 
 TEST_CASE( "Enums in Switch Statement" ) {
-    using enum Colors;  // to avoid repetition in switch
-
-    auto x = Yellow;
+    auto x = Colors::Yellow;
 
     switch (x) {
-        case Red:
-        case Orange:
-        case Yellow:
-            REQUIRE( x == Yellow );
+        case Colors::Red:
+        case Colors::Orange:
+        case Colors::Yellow:
+            REQUIRE( x == Colors::Yellow );
             break;
-        case Blue:
-        case Green:
-        case Indigo:
-        case Violet:
-            REQUIRE( x == Blue );
+        case Colors::Blue:
+        case Colors::Green:
+        case Colors::Indigo:
+        case Colors::Violet:
+            REQUIRE( x == Colors::Blue );
+            break;
     }
 }

@@ -21,6 +21,6 @@ TEST_CASE( "MultiMap Allows Multiple Values with the Same Key" ) {
 
     for (auto it = begin; it != end; ++it) {
         REQUIRE( it->first == 2 );
-        REQUIRE( (it->second == "two" or it->second == "zwei") );
+        REQUIRE( (it->second == "two" || it->second == "zwei") );
     }
 }

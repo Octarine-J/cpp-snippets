@@ -8,7 +8,7 @@ TEST_CASE( "Print Boolean" ) {
     std::stringstream ss;
 
     // print boolean (as "true" or "false")
-    bool b {true};
+    bool b = true;
     ss << std::boolalpha << b;
 
     REQUIRE( ss.str() == "true" );
@@ -22,7 +22,7 @@ TEST_CASE( "Print Hex Number") {
 
     REQUIRE( ss.str() == "0xff" );
 
-    ss.str({});
+    ss.str("");
     ss << std::dec << h;  // undo hex
 
     REQUIRE( ss.str() == "255" );
@@ -35,7 +35,7 @@ TEST_CASE( "Print Formatted Number" ) {
     ss << std::setfill('0') << std::setw(6) << 123;
     REQUIRE( ss.str() == "000123" );
 
-    ss.str({});
+    ss.str("");
     ss << std::setfill(' ');  // undo fill
 
     // print a floating point number

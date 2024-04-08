@@ -89,8 +89,8 @@ TEST_CASE( "Using Map in a For-Loop" ) {
     };
 
     for (const auto& [animal, name] : animals) {
-        REQUIRE( (animal == "cat" or animal == "dog") );
-        REQUIRE( (name == "White" or name == "Spot") );
+        REQUIRE( (animal == "cat" || animal == "dog") );
+        REQUIRE( (name == "White" || name == "Spot") );
     }
 }
 
