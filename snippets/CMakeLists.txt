@@ -47,6 +47,7 @@ set(SOURCES
         multithreading/threads_async.cpp
         multithreading/threads_future.cpp
         numbers/arithmetic.cpp
+        numbers/random.cpp
         numbers/time_duration.cpp
         object_oriented/classes.cpp
         object_oriented/classes_inheritance.cpp
