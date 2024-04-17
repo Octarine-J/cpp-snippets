@@ -21,15 +21,32 @@ std::vector<std::string_view> tokenize(std::string_view sentence, char separator
 }
 
 TEST_CASE( "Tokenize" ) {
-    const std::string sentence {"I have a white cat"};
+    const std::string sentence = "I have a white cat";
     const std::vector<std::string_view> expected_tokens {"I", "have", "a", "white", "cat"};
 
-    const auto result = tokenize(sentence, ' ');
+    const auto tokens = tokenize(sentence, ' ');
 
-    REQUIRE( result == expected_tokens );
+    REQUIRE( tokens == expected_tokens );
 }
 
-// do NOT use string_view for temporary objects, e.g.
-// string s {"test"};
+// DO NOT use string_view for temporary objects, e.g.
+// string s = "test";
 // string_view sw { s + " app" };
 // cout << sw;  // undefined behavior
+
+// Another example: work with string_view
+// but return string when needed
+std::string get_extension(std::string_view filename) {
+    std::size_t pos = filename.rfind('.');
+    if (pos != std::string::npos) {
+        return std::string {filename.substr(pos + 1)};
+    } else {
+        return {};
+    }
+}
+
+TEST_CASE( "String View: Get Extension" ) {
+    REQUIRE( get_extension("C:\\data\\file.docx") == "docx" );
+    REQUIRE( get_extension("file.dat") == "dat" );
+    REQUIRE( get_extension("file") == "" );
+}

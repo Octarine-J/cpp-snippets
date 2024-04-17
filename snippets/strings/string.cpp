@@ -16,6 +16,13 @@ TEST_CASE( "String Init" ) {
     REQUIRE( s3 == "hello, cccccccccc" );
 }
 
+TEST_CASE( "Raw Strings" ) {
+    // R"( denotes start and )" denotes end of a raw string
+    std::string s = R"(Robert "Uncle Bob" Martin)";
+
+    REQUIRE( s == "Robert \"Uncle Bob\" Martin" );
+}
+
 TEST_CASE( "String Modification" ) {
     std::string s = "hello";
 

@@ -21,6 +21,7 @@ TEST_CASE( "Array Iteration" ) {
         REQUIRE( *it < 5 );
     }
 
+
     // using for-range loop
     for (auto& value : values) {
         REQUIRE( value < 5 );

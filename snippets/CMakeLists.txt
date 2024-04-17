@@ -37,9 +37,9 @@ set(SOURCES
         core_language/attributes.cpp
         core_language/cast.cpp
         core_language/control_statements.cpp
-        core_language/initialization.cpp
         core_language/iterators.cpp
         core_language/namespaces.cpp
+        core_language/variables.cpp
         functional/lambda.cpp
         functional/functions.cpp
         functional/functor.cpp

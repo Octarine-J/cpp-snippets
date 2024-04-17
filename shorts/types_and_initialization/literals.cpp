@@ -20,9 +20,6 @@ double operator"" _cm(const char *value) {
 #pragma ide diagnostic ignored "UnusedValue"
 int main() {
     // every literal has a type
-    int i1 = 20, i2 = 024, i3 = 0x14;  // decimal, octal, hexadecimal integers
-    int i4 = 0b1001011;                // C++14: binary literals
-    int i5 = 1'024'768;                // can separate digits with '
     unsigned long long i6 = 42ULL;
     float f1 = 1e-3f;
     long double d1 = 3.1415926L;
@@ -42,10 +39,6 @@ int main() {
     std::cout << "a long long line"
                  " can span multiple lines"
               << std::endl;
-
-    // raw string literal
-    const char *s2 = R"(Robert "Uncle Bob" Martin)";
-    std::cout << s2 << std::endl;
 
     char *p1 = nullptr; // pointer literal
 

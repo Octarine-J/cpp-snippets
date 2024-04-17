@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 project(snippets-2x)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
 include(FetchContent)
@@ -14,12 +14,14 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Catch2)
 
 set(SOURCES
-        arithmetic.cpp
-        cast.cpp
-        concepts.cpp
-        concepts_custom.cpp
-        functions.cpp
-        structs.cpp
+        src/arithmetic.cpp
+        src/cast.cpp
+        src/concepts.cpp
+        src/concepts_custom.cpp
+        src/control_statements.cpp
+        src/functions.cpp
+        src/structs.cpp
+        src/strings.cpp
 )
 
 add_executable(all-tests ${SOURCES})
