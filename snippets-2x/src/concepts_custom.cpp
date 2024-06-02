@@ -16,7 +16,7 @@ TEST_CASE( "User-Defined Concepts" ) {
     REQUIRE( not eq_comparable<S> );  // structs don't define == by default
 }
 
-// template function that accepts any parameter that matches the concept
+// template function that accepts any parameter that matches the concept;
 // auto keyword is required after the concept name
 eq_comparable auto concept_foo(eq_comparable auto& x) {
     return x;

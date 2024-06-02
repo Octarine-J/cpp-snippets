@@ -24,5 +24,6 @@ set(SOURCES
         src/strings.cpp
 )
 
+# -lstdc++exp is required for MinGW to enable some C++23 features
 add_executable(all-tests ${SOURCES})
-target_link_libraries(all-tests PRIVATE Catch2::Catch2WithMain)
+target_link_libraries(all-tests PRIVATE Catch2::Catch2WithMain -lstdc++exp)

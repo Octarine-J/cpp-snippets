@@ -39,10 +39,10 @@ TEST_CASE( "Print Formatted Number" ) {
     ss << std::setfill(' ');  // undo fill
 
     // print a floating point number
-    // setprecision: total 5 digits (before and after the dot)
+    // NOTE: without std::fixed, it would be total 5 digits (before and after the dot)
     double a = 27.9876125;
-    ss << std::setprecision(5) << a;
-    REQUIRE( ss.str() == "27.988" );
+    ss << std::fixed << std::setprecision(5) << a;
+    REQUIRE( ss.str() == "27.98761" );
 }
 
 TEST_CASE( "Print Money" ) {
