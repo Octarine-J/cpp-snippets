@@ -40,6 +40,19 @@ TEST_CASE( "Modify Pointer Passed to Function" ) {
     delete ptr;
 }
 
+TEST_CASE( "New and Malloc Differences" ) {
+    // malloc: doesn't call constructors; returns null when allocation failed
+    // new: calls constructors, throws bad_alloc exception if allocation failed
+
+    // can force new to return nullptr instead of throwing an exception:
+    int* ptr = new(std::nothrow) int[5];
+
+    REQUIRE( ptr != nullptr );
+
+    // delete: unlike free() calls objects' destructors
+    delete[] ptr;
+}
+
 TEST_CASE( "Print Pointer" ) {
     int a = 7;
     int* ptr = &a;
